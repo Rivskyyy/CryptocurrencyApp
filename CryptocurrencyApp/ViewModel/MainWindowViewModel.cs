@@ -1,33 +1,76 @@
-﻿using CryptocurrencyApp.Model;
+﻿using CryptocurrencyApp.APIs;
+using CryptocurrencyApp.Model;
 using Newtonsoft.Json;
 using System.Diagnostics;
 using System.Net.Http;
 using System.Windows;
+using System.Windows.Input;
 
 namespace CryptocurrencyApp.ViewModel
 {
     class MainWindowViewModel : BaseViewModel
     {
-        private readonly HttpClient _httpClient;              // Ініціалізація http-клієнта
+        private readonly CoinCapApiClient _coinCapApiClient = new CoinCapApiClient();
+        private readonly HttpClient _httpClient;
+        private List<CryptoData> _cryptoCurrency;
+        private bool _isLoading = false;
+        private string _buttonText = "Refresh";
 
-        public List<CryptoData> _cryptoCurrency;
-        
-        public List<CryptoData> CryptoCurrency { get => _cryptoCurrency;
-
+        public Command AddCommand { get; }
+        public List<CryptoData> CryptoCurrency
+        {
+            get => _cryptoCurrency;
             set
             {
                 _cryptoCurrency = value;
                 OnPropertyChanged(nameof(CryptoCurrency));
-
             }
         }
 
+        public string ButtonText
+        {
+            get => _buttonText;
+
+            set
+            {
+                _buttonText = value; 
+                OnPropertyChanged(nameof(ButtonText));
+                Debug.WriteLine($"ButtonText set to: {_buttonText}");
+            }
+        }
+
+        public bool IsLoading
+        {
+            get => _isLoading;
+            set
+            {
+                _isLoading = value;
+                OnPropertyChanged(nameof(IsLoading));
+                //ButtonText = _isLoading ? "Refreshing..." : "Refresh";
+            }
+        }
+
+        public ICommand RefreshDataCommand { get; set; }
+
         public MainWindowViewModel()
         {
+            RefreshDataCommand = new Command(LoadDataAsync, () => !IsLoading);
+        }
 
-            _httpClient = new HttpClient();
-            LoadCryptoCurrencyAsync();             //  Завантажуємо крипту при створенні ViewModel
-
+        private async Task LoadDataAsync()
+        {
+            IsLoading = true;
+            //ButtonText = "Refreshing...";
+            try
+            {
+                var result = await _coinCapApiClient.GetCurrenciesAsync();
+                CryptoCurrency = result;
+            }
+            finally
+            {
+                IsLoading = false;
+                //ButtonText = "Refresh";
+            }
         }
 
         private async Task LoadCryptoCurrencyAsync()
@@ -42,20 +85,20 @@ namespace CryptocurrencyApp.ViewModel
                 Debug.WriteLine("Data loaded successfully.");
 
                 var cryptoResponse = JsonConvert.
-                    DeserializeObject<CryptoResponse>(response);     //десереалізація json в об єкт CryptoResponse
+                    DeserializeObject<CryptoResponse>(response);
 
-                CryptoCurrency = cryptoResponse.Data;                 //Зберігаємо дані про крипту
+                CryptoCurrency = cryptoResponse.Data;
 
-               // Debug.WriteLine($"Loaded Data: {_cryptoCurrency.Name}");
+
 
                 Debug.WriteLine($"Loaded Data:{cryptoResponse.Data}");
 
-                     
+
             }
 
             catch (HttpRequestException e)
             {
-                Debug.WriteLine($"Error loading data: {e.Message}"); // Помилка при завантаженні
+
                 MessageBox.Show("Could not load data.", $"Error:{e}", MessageBoxButton.OK, MessageBoxImage.Error);
 
             }
