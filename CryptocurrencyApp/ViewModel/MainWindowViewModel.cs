@@ -1,10 +1,10 @@
-﻿using CurrencyAppTest.Model;
+﻿using CryptocurrencyApp.Model;
 using Newtonsoft.Json;
 using System.Diagnostics;
 using System.Net.Http;
 using System.Windows;
 
-namespace CurrencyAppTest.ViewModel
+namespace CryptocurrencyApp.ViewModel
 {
     class MainWindowViewModel : BaseViewModel
     {

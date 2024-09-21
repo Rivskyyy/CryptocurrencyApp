@@ -1,8 +1,8 @@
-﻿using CurrencyAppTest.ViewModel;
+﻿using CryptocurrencyApp.ViewModel;
 using System.Diagnostics;
 using System.Windows;
 
-namespace CurrencyAppTest.View
+namespace CryptocurrencyApp.View
 {
 
     public partial class MainWindow : Window

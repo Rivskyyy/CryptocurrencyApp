@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CurrencyAppTest.ViewModel
+namespace CryptocurrencyApp.ViewModel
 {
     internal class BaseViewModel : INotifyPropertyChanged
     {

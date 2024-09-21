@@ -1,9 +1,9 @@
-﻿using CurrencyAppTest.View;
+﻿using CryptocurrencyApp.View;
 using System.Configuration;
 using System.Data;
 using System.Windows;
 
-namespace CurrencyAppTest
+namespace CryptocurrencyApp
 {
     /// <summary>
     /// Interaction logic for App.xaml

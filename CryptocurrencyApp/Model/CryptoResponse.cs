@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CurrencyAppTest.Model
+namespace CryptocurrencyApp.Model
 {
     public class CryptoResponse
     {
