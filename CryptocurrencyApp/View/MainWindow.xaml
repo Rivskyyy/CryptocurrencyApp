@@ -1,43 +1,70 @@
-﻿<Window x:Class="CryptocurrencyApp.View.MainWindow"
+﻿<ui:FluentWindow x:Class="CryptocurrencyApp.View.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CryptocurrencyApp"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="100"/> 
+            <RowDefinition Height="*"/> 
         </Grid.RowDefinitions>
+        
+          <ui:TitleBar Title="CryptocurrencyApp" FontWeight="Bold"/>
         <DockPanel Grid.Row="0">
-            <Button Name="btnRefresh" Content="{Binding IsLoading, Converter={StaticResource BoolToRefreshTextConverter}}" Command="{Binding RefreshDataCommand}" />
+            
+        </DockPanel>
+            <DockPanel Grid.Row="1" >
+            <ui:Card Margin="0,30,0,0"  Height="300" >
+                <ui:Button Name="btnRefresh"
+            Icon="{ui:SymbolIcon Fluent24}" 
+            Command="{Binding RefreshDataCommand}" 
+            FontSize="25"
+            Width="250"
+            Height="50">
+                    <ui:Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Refresh" FontSize="25" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </ui:Button.Content>
+                </ui:Button>
+            </ui:Card>
+           
         </DockPanel>
         <DataGrid
-            Grid.Row="1"
+            Grid.Row="2"
             ItemsSource="{Binding CryptoCurrency}"
             IsReadOnly="True"
             AutoGenerateColumns="False"
             SelectionMode="Single">
-            <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Rank}" Header="Rank"/>
-                <DataGridTextColumn Binding="{Binding Symbol}" Header="Symbol"/>
-                <DataGridTextColumn Binding="{Binding Name}" Header="Name"/>
-                <DataGridTextColumn Binding="{Binding PriceUsd}" Header="PriceUsd"/>
+         
+            <DataGrid.Columns >
+                <DataGridTextColumn Binding="{Binding Rank}" Header="Rank" FontSize="50" />
+                <DataGridTextColumn Binding="{Binding Symbol}" Header="Symbol" FontSize="50"/>
+                <DataGridTextColumn Binding="{Binding Name}" Header="Name" FontSize="50"/>
                 <DataGridTemplateColumn Header="Datails">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Open"/>
+                            <ui:Button   Width="200">
+                                <ui:Button.Content>
+                                    <TextBlock Text="Open" FontSize="50" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+                                </ui:Button.Content>
+                            </ui:Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
 
-        <!--<Grid Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibilityConverter}}" Background="White" Grid.Row="0"
-              Grid.RowSpan="2">
-            <TextBlock Text="Refreshing...." VerticalAlignment="Center" HorizontalAlignment="Center"/>
-        </Grid>-->
+        <Grid Visibility="{Binding IsLoading, Converter={StaticResource BoolToRefreshTextConverter}}"  Grid.Row="2" 
+             >
+            <TextBlock Text="Refreshing...." VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="80"/>
+        </Grid>
     </Grid>
-</Window>
+</ui:FluentWindow>
