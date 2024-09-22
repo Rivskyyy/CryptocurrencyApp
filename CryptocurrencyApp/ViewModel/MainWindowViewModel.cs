@@ -1,9 +1,7 @@
 ﻿using CryptocurrencyApp.APIs;
 using CryptocurrencyApp.Model;
-using Newtonsoft.Json;
 using System.Diagnostics;
 using System.Net.Http;
-using System.Windows;
 using System.Windows.Input;
 
 namespace CryptocurrencyApp.ViewModel
@@ -12,11 +10,9 @@ namespace CryptocurrencyApp.ViewModel
     {
         private readonly CoinCapApiClient _coinCapApiClient = new CoinCapApiClient();
         private readonly HttpClient _httpClient;
-        private List<CryptoData> _cryptoCurrency;
-        private bool _isLoading = false;
-        private string _buttonText = "Refresh";
-
         public Command AddCommand { get; }
+        public ICommand RefreshDataCommand { get; set; }
+        private List<CryptoData> _cryptoCurrency;
         public List<CryptoData> CryptoCurrency
         {
             get => _cryptoCurrency;
@@ -27,18 +23,20 @@ namespace CryptocurrencyApp.ViewModel
             }
         }
 
+        private string _buttonText = "Refresh";
         public string ButtonText
         {
             get => _buttonText;
 
             set
             {
-                _buttonText = value; 
+                _buttonText = value;
                 OnPropertyChanged(nameof(ButtonText));
                 Debug.WriteLine($"ButtonText set to: {_buttonText}");
             }
         }
 
+        private bool _isLoading;
         public bool IsLoading
         {
             get => _isLoading;
@@ -50,11 +48,11 @@ namespace CryptocurrencyApp.ViewModel
             }
         }
 
-        public ICommand RefreshDataCommand { get; set; }
 
         public MainWindowViewModel()
         {
             RefreshDataCommand = new Command(LoadDataAsync, () => !IsLoading);
+            LoadDataAsync();
         }
 
         private async Task LoadDataAsync()
@@ -65,42 +63,12 @@ namespace CryptocurrencyApp.ViewModel
             {
                 var result = await _coinCapApiClient.GetCurrenciesAsync();
                 CryptoCurrency = result;
+                Debug.WriteLine($"Loaded {CryptoCurrency} items.");
             }
             finally
             {
                 IsLoading = false;
                 //ButtonText = "Refresh";
-            }
-        }
-
-        private async Task LoadCryptoCurrencyAsync()
-        {
-            Debug.WriteLine("Starting to load cryptocurrency data...");
-            try
-            {
-
-                string url = "https://api.coincap.io/v2/assets";
-                var response = await _httpClient.GetStringAsync(url);
-
-                Debug.WriteLine("Data loaded successfully.");
-
-                var cryptoResponse = JsonConvert.
-                    DeserializeObject<CryptoResponse>(response);
-
-                CryptoCurrency = cryptoResponse.Data;
-
-
-
-                Debug.WriteLine($"Loaded Data:{cryptoResponse.Data}");
-
-
-            }
-
-            catch (HttpRequestException e)
-            {
-
-                MessageBox.Show("Could not load data.", $"Error:{e}", MessageBoxButton.OK, MessageBoxImage.Error);
-
             }
         }
     }
