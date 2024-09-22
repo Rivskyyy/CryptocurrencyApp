@@ -12,6 +12,6 @@ namespace CryptocurrencyApp.Model
         public string Rank { get; set; }
         public string Symbol { get; set; }
         public string Name { get; set; }
-        public string PriceUsd { get; set; }
+        
     }
 }
