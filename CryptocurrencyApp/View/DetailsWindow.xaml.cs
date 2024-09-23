@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CryptocurrencyApp.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,11 @@ namespace CryptocurrencyApp.View
     /// </summary>
     public partial class DetailsWindow : FluentWindow
     {
-        public DetailsWindow()
+        public DetailsWindow(string id)
         {
             InitializeComponent();
+            DetailsWindowViewModel detailsWindowViewModel = new DetailsWindowViewModel(id);
+            DataContext = detailsWindowViewModel;
         }
     }
 }
