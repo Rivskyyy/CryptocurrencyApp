@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CryptocurrencyApp"
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+                
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
@@ -17,20 +18,28 @@
         
           <ui:TitleBar Title="CryptocurrencyApp" FontWeight="Bold"/>
         <DockPanel Grid.Row="0">
-            
         </DockPanel>
-            <DockPanel Grid.Row="1" >
+        <DockPanel Grid.Row="1" >
             <ui:Card Margin="0,30,0,0"  Height="300" >
-                <ui:Button Name="btnRefresh"
-            Icon="{ui:SymbolIcon Fluent24}" 
-            Command="{Binding RefreshDataCommand}" 
-            FontSize="25"
-            Width="250"
-            Height="50">
+                <ui:TextBox Name="txtSearch"
+                  FontSize="25"
+                  Width="250"
+                  Height="50"/>
+                </ui:Card>
+            
+                <ui:Card Margin="0,30,0,0"  Height="300" >
+                <ui:Button 
+                     Name="btnRefresh"
+                     Command="{Binding RefreshDataCommand}" 
+                     FontSize="25"
+                     Width="250"
+                     Height="50">
                     <ui:Button.Content>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Refresh" FontSize="25" VerticalAlignment="Center" />
+                            <ui:SymbolIcon  Symbol="ArrowSync12" />
                         </StackPanel>
+                        
                     </ui:Button.Content>
                 </ui:Button>
             </ui:Card>
@@ -50,7 +59,8 @@
                 <DataGridTemplateColumn Header="Datails">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <ui:Button   Width="200">
+                            <ui:Button  Name="btnOpenDetails"   Command="{Binding DataContext.OpenDetailsWindowCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" 
+                                         Width="200" Click="btnOpenDetails_Click" CommandParameter="{Binding Id}" >
                                 <ui:Button.Content>
                                     <TextBlock Text="Open" FontSize="50" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
