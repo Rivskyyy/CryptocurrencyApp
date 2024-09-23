@@ -10,13 +10,8 @@ namespace CryptocurrencyApp.View
         public MainWindow()
         {
             InitializeComponent();
-            MainWindowViewModel viewModel = new MainWindowViewModel();
+            MainWindowViewModel viewModel = new MainWindowViewModel(MainFrame);
             DataContext = viewModel;
-        }
-
-        private void btnOpenDetails_Click(object sender, RoutedEventArgs e)
-        {
-            Debug.WriteLine("Button Open Clicked");
         }
     }
 }
