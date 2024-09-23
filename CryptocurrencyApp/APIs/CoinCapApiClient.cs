@@ -43,19 +43,19 @@ namespace CryptocurrencyApp.APIs
             }
         }
 
-        public async Task<CryptoDataDetail> GetCurrencyDetailsAsync(int currencyId)
+        public async Task<CryptoDataDetail?> GetCurrencyDetailsAsync(string currencyId)
         {
             try
             {
                 var response = await _httpClient.GetAsync($"assets/{currencyId}");
+                response.EnsureSuccessStatusCode();
 
                 Debug.WriteLine("Data loaded successfully.");
 
                 var cryptoDetailResponse = await response.Content.ReadFromJsonAsync<CryptoDetailResponse>();
 
-                // Debug.WriteLine($"Loaded Data:{cryptoResponse.Data}");
 
-                return cryptoDetailResponse.Data.FirstOrDefault();
+                return cryptoDetailResponse.Data;
             }
             catch (HttpRequestException e)
             {
