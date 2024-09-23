@@ -20,7 +20,7 @@ namespace CryptocurrencyApp.View
     /// </summary>
     public partial class DetailsWindow : FluentWindow
     {
-        public DetailsWindow(string ID)
+        public DetailsWindow()
         {
             InitializeComponent();
         }
