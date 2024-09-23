@@ -3,6 +3,7 @@ using CryptocurrencyApp.Model;
 using System.Diagnostics;
 using System.Net.Http;
 using System.Windows.Input;
+using CryptocurrencyApp.View;
 
 namespace CryptocurrencyApp.ViewModel
 {
@@ -10,8 +11,9 @@ namespace CryptocurrencyApp.ViewModel
     {
         private readonly CoinCapApiClient _coinCapApiClient = new CoinCapApiClient();
         private readonly HttpClient _httpClient;
-        public Command AddCommand { get; }
+        public ICommand OpenDetailsWindowCommand { get; set; }
         public ICommand RefreshDataCommand { get; set; }
+
         private List<CryptoData> _cryptoCurrency;
         public List<CryptoData> CryptoCurrency
         {
@@ -32,7 +34,6 @@ namespace CryptocurrencyApp.ViewModel
             {
                 _buttonText = value;
                 OnPropertyChanged(nameof(ButtonText));
-                Debug.WriteLine($"ButtonText set to: {_buttonText}");
             }
         }
 
@@ -44,31 +45,47 @@ namespace CryptocurrencyApp.ViewModel
             {
                 _isLoading = value;
                 OnPropertyChanged(nameof(IsLoading));
-                //ButtonText = _isLoading ? "Refreshing..." : "Refresh";
             }
         }
-
 
         public MainWindowViewModel()
         {
             RefreshDataCommand = new Command(LoadDataAsync, () => !IsLoading);
+            OpenDetailsWindowCommand = new Command(OpenDetailsWindow, () => true);
+
             LoadDataAsync();
+            
+
+        }
+        private void OpenDetailsWindow(string id)
+        {
+            Debug.WriteLine("OpenDetailsWindow command executed");
+            DetailsWindow detailsWindow = new DetailsWindow();
+            detailsWindow.Show();
+
         }
 
         private async Task LoadDataAsync()
         {
             IsLoading = true;
-            //ButtonText = "Refreshing...";
+          
+            if (IsLoading== true && CryptoCurrency != null)
+            {
+                CryptoCurrency = null;                              
+                OnPropertyChanged(nameof(CryptoCurrency));          
+            }
+            
             try
             {
                 var result = await _coinCapApiClient.GetCurrenciesAsync();
                 CryptoCurrency = result;
+
                 Debug.WriteLine($"Loaded {CryptoCurrency} items.");
             }
             finally
             {
                 IsLoading = false;
-                //ButtonText = "Refresh";
+                
             }
         }
     }
