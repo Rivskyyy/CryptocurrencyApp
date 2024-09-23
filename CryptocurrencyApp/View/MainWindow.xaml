@@ -5,39 +5,100 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CryptocurrencyApp"
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-                
+
+        WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Background="Transparent"
+        Title="MainWindow" Height="600" Width="850">
+    
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="228" />
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
-            <RowDefinition Height="100"/> 
-            <RowDefinition Height="*"/> 
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+
+        <ui:TitleBar Grid.ColumnSpan="2" Title="CryptocurrencyApp" FontWeight="Bold"/>
         
-          <ui:TitleBar Title="CryptocurrencyApp" FontWeight="Bold"/>
-        <DockPanel Grid.Row="0">
-        </DockPanel>
-        <DockPanel Grid.Row="1" >
-            <ui:Card Margin="0,30,0,0"  Height="300" >
-                <ui:TextBox Name="txtSearch"
+        <DockPanel Grid.Row="1" Grid.Column="0"  >
+
+            <ui:Card Margin="0,30,0,0" 
+                     Height="300"
+                     Background="#3b3b3b">
+                <ui:TextBox Name="txtSearch" 
+                            Text="Search..."
+                            Foreground="DarkGray"
                   FontSize="25"
-                  Width="250"
-                  Height="50"/>
+                  Width="228"
+                  Height="50" />
+                
+            </ui:Card>
+        </DockPanel>
+
+        <Grid Grid.Row="2"
+              HorizontalAlignment="Left"
+              Width="228"> 
+            <Border Background="#3b3b3b"/>
+            <StackPanel Height="400" HorizontalAlignment="Center" 
+                        VerticalAlignment="Top"
+                        Width="228" >
+                <ui:Card>
+                    <ui:Button 
+                     Name="btnHome"
+                        FontSize="25"
+                        Height="60"
+                      Width="200"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top">
+                        <ui:Button.Content>
+                            <StackPanel Orientation="Horizontal" >
+                                <ui:SymbolIcon  Symbol="Home32" Margin="0,0,10,0" />
+                                <TextBlock Text="Home" FontSize="25" />
+                            </StackPanel>
+                        </ui:Button.Content>
+                    </ui:Button>
                 </ui:Card>
+                <ui:Card>
+                    <ui:Button 
+      Name="btnSettings"
+         FontSize="25"
+         Height="60"
+       Width="200"
+         HorizontalAlignment="Center"
+         VerticalAlignment="Top">
+                        <ui:Button.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <ui:SymbolIcon  Symbol="Settings28" Margin="0,0,10,0" />
+                                <TextBlock Text="Settings" FontSize="25" />
+                            </StackPanel>
+                        </ui:Button.Content>
+                    </ui:Button>
+                </ui:Card>
+            </StackPanel>
             
+          
+        </Grid>
+        
+        <DockPanel Grid.Row="1" Grid.Column="1">
+           
                 <ui:Card Margin="0,30,0,0"  Height="300" >
                 <ui:Button 
                      Name="btnRefresh"
                      Command="{Binding RefreshDataCommand}" 
                      FontSize="25"
-                     Width="250"
+                     Width="150"
                      Height="50">
                     <ui:Button.Content>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Refresh" FontSize="25" VerticalAlignment="Center" />
-                            <ui:SymbolIcon  Symbol="ArrowSync12" />
+                            <ui:SymbolIcon  Symbol="ArrowSync12" Margin="0,0,10,0"  />
+                            <TextBlock Text="Refresh" FontSize="25"
+                                       VerticalAlignment="Center" />
+                           
                         </StackPanel>
                         
                     </ui:Button.Content>
@@ -47,22 +108,28 @@
         </DockPanel>
         <DataGrid
             Grid.Row="2"
+            Grid.Column="1"
             ItemsSource="{Binding CryptoCurrency}"
             IsReadOnly="True"
             AutoGenerateColumns="False"
             SelectionMode="Single">
          
             <DataGrid.Columns >
-                <DataGridTextColumn Binding="{Binding Rank}" Header="Rank" FontSize="50" />
-                <DataGridTextColumn Binding="{Binding Symbol}" Header="Symbol" FontSize="50"/>
-                <DataGridTextColumn Binding="{Binding Name}" Header="Name" FontSize="50"/>
+                <DataGridTextColumn Binding="{Binding Rank}" Header="Rank" FontSize="20" />
+                <DataGridTextColumn Binding="{Binding Symbol}" Header="Symbol" FontSize="20"/>
+                <DataGridTextColumn Binding="{Binding Name}" Header="Name" FontSize="20"/>
                 <DataGridTemplateColumn Header="Datails">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <ui:Button  Name="btnOpenDetails"   Command="{Binding DataContext.OpenDetailsWindowCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" 
-                                         Width="200" Click="btnOpenDetails_Click" CommandParameter="{Binding Id}" >
+                            <ui:Button  Name="btnOpenDetails"  
+                                        Command="{Binding DataContext.OpenDetailsWindowCommand,
+                                RelativeSource={RelativeSource AncestorType={x:Type Window}}}" 
+                                         Width="200" Click="btnOpenDetails_Click" 
+                                        CommandParameter="{Binding Id}" >
                                 <ui:Button.Content>
-                                    <TextBlock Text="Open" FontSize="50" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="Open" FontSize="20" 
+                                               VerticalAlignment="Center" 
+                                               HorizontalAlignment="Center"/>
 
                                 </ui:Button.Content>
                             </ui:Button>
@@ -72,9 +139,33 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <Grid Visibility="{Binding IsLoading, Converter={StaticResource BoolToRefreshTextConverter}}"  Grid.Row="2" 
+        <Grid Visibility="{Binding IsLoading,
+            Converter={StaticResource 
+            BoolToRefreshTextConverter}}" 
+              Grid.Row="2" 
+              Grid.Column="1"
              >
-            <TextBlock Text="Refreshing...." VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="80"/>
+            <!--<TextBlock Text="Refreshing...." 
+                       VerticalAlignment="Center" 
+                       HorizontalAlignment="Center" 
+                       FontSize="40"/>-->
+            <ui:SymbolIcon Symbol="ArrowSync12" FontSize="70" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <ui:SymbolIcon.RenderTransform>
+                    <RotateTransform x:Name="rotateTransform" CenterX="35" CenterY="35" />
+                </ui:SymbolIcon.RenderTransform>
+                <ui:SymbolIcon.Triggers>
+                    <EventTrigger RoutedEvent="Loaded">
+                        <BeginStoryboard>
+                            <Storyboard RepeatBehavior="Forever">
+                                <DoubleAnimation
+                            Storyboard.TargetName="rotateTransform"
+                            Storyboard.TargetProperty="Angle"
+                            From="0" To="360" Duration="0:0:2" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </ui:SymbolIcon.Triggers>
+            </ui:SymbolIcon>
         </Grid>
     </Grid>
 </ui:FluentWindow>
