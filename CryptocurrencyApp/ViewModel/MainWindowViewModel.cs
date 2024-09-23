@@ -6,20 +6,21 @@ using System.Windows.Input;
 using CryptocurrencyApp.View;
 using Prism.Mvvm;
 using Prism.Commands;
+using System.Collections.ObjectModel;
 
 namespace CryptocurrencyApp.ViewModel
 {
     class MainWindowViewModel : BindableBase
     {
         private readonly CoinCapApiClient _coinCapApiClient = new CoinCapApiClient();
-        private List<CryptoData> _cryptoCurrency;
+        private ObservableCollection<CryptoData> _cryptoCurrency;
         private bool _isLoading;
         private string _buttonText = "Refresh";
 
         public ICommand OpenDetailsWindowCommand { get; set; }
         public ICommand RefreshDataCommand { get; set; }
 
-        public List<CryptoData> CryptoCurrency
+        public ObservableCollection<CryptoData> CryptoCurrency
         {
             get => _cryptoCurrency;
             set => SetProperty(ref _cryptoCurrency, value);
@@ -42,6 +43,8 @@ namespace CryptocurrencyApp.ViewModel
             RefreshDataCommand = new DelegateCommand(LoadDataAsync, () => true);
             OpenDetailsWindowCommand = new DelegateCommand<string>(OpenDetailsWindow, _ => true);
 
+            CryptoCurrency = new ObservableCollection<CryptoData>();
+
             LoadDataAsync();
         }
         private void OpenDetailsWindow(string id)
@@ -54,16 +57,13 @@ namespace CryptocurrencyApp.ViewModel
         private async void LoadDataAsync()
         {
             IsLoading = true;
-          
-            if (IsLoading== true && CryptoCurrency != null)
-            {
-                CryptoCurrency = null;                                
-            }
-            
+
+            CryptoCurrency.Clear();
+
             try
             {
                 var result = await _coinCapApiClient.GetCurrenciesAsync();
-                CryptoCurrency = result;
+                CryptoCurrency.AddRange(result);
 
                 Debug.WriteLine($"Loaded {CryptoCurrency} items.");
             }
