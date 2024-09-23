@@ -7,12 +7,14 @@ using CryptocurrencyApp.View;
 using Prism.Mvvm;
 using Prism.Commands;
 using System.Collections.ObjectModel;
+using System.Windows.Controls;
 
 namespace CryptocurrencyApp.ViewModel
 {
     class MainWindowViewModel : BindableBase
     {
         private readonly CoinCapApiClient _coinCapApiClient = new CoinCapApiClient();
+        private readonly Frame _frame;
         private ObservableCollection<CryptoData> _cryptoCurrency;
         private bool _isLoading;
         private string _buttonText = "Refresh";
@@ -38,8 +40,9 @@ namespace CryptocurrencyApp.ViewModel
             set => SetProperty(ref _isLoading, value);
         }
 
-        public MainWindowViewModel()
+        public MainWindowViewModel(Frame frame)
         {
+            _frame = frame;
             RefreshDataCommand = new DelegateCommand(LoadDataAsync, () => true);
             OpenDetailsWindowCommand = new DelegateCommand<string>(OpenDetailsWindow, _ => true);
 
@@ -49,8 +52,8 @@ namespace CryptocurrencyApp.ViewModel
         }
         private void OpenDetailsWindow(string id)
         {
-            Debug.WriteLine("OpenDetailsWindow command executed");
-            DetailsWindow detailsWindow = new DetailsWindow();
+            var detailsViewModel = new DetailsWindowViewModel(id);
+            DetailsWindow detailsWindow = new DetailsWindow(id);
             detailsWindow.Show();
         }
 
