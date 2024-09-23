@@ -5,7 +5,8 @@ namespace CryptocurrencyApp
 {
     internal class Command : ICommand
     {
-        private readonly Func<Task> _execute;
+        private readonly Func<Task> _executeAsync;
+        private readonly Action _execute;
         private readonly Func<bool> _canExecute;
 
         public event EventHandler? CanExecuteChanged
@@ -13,10 +14,14 @@ namespace CryptocurrencyApp
             add { CommandManager.RequerySuggested += value;}
             remove { CommandManager.RequerySuggested += value;}
         }
-
-        public Command(Func<Task> execute, Func<bool> canExecute = null)
+        public Command(Action execute, Func<bool> canExecute = null)
         {
             _execute = execute ?? throw new ArgumentNullException(nameof(execute));
+            _canExecute = canExecute;
+        }
+        public Command(Func<Task> execute, Func<bool> canExecute = null)
+        {
+            _executeAsync = execute ?? throw new ArgumentNullException(nameof(execute));
             _canExecute = canExecute;
         }
 
@@ -25,9 +30,25 @@ namespace CryptocurrencyApp
             return _canExecute == null || _canExecute();
         }
 
-        public async void Execute(object? parameter)
+        public void Execute(object? parameter) 
         {
-            await _execute();
+            if (_executeAsync != null)
+            {
+                ExecuteAsync(parameter);
+            }
+            else
+            {
+                _execute?.Invoke();
+            }
+        
         }
+
+        public async void ExecuteAsync(object? parameter)
+        {
+            await _executeAsync();
+        }
+
+        
+
     }
 }
