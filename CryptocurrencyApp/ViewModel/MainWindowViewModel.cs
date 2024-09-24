@@ -18,6 +18,7 @@ namespace CryptocurrencyApp.ViewModel
         private ObservableCollection<CryptoData> _cryptoCurrency;
         private ObservableCollection<CryptoData> _filteredCryptoCurrency;
         private string _searchText;
+        private bool _isPlaceholderVisible = true;
         private bool _isLoading;
         private string _buttonText = "Refresh";
 
@@ -42,9 +43,16 @@ namespace CryptocurrencyApp.ViewModel
                 SetProperty(ref _searchText, value);
                 SearchCryptocurrency();
                 Console.WriteLine($"Search query changed: {value}");
+                IsPlaceholderVisible = string.IsNullOrEmpty(value);
             }
-
         }
+
+        public bool IsPlaceholderVisible
+        {
+            get => _isPlaceholderVisible;
+            set => SetProperty(ref _isPlaceholderVisible, value);
+        }
+
 
         private void SearchCryptocurrency()
         {
