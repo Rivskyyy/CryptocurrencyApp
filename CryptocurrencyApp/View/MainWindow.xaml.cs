@@ -10,7 +10,7 @@ namespace CryptocurrencyApp.View
         public MainWindow()
         {
             InitializeComponent();
-            MainWindowViewModel viewModel = new MainWindowViewModel(MainFrame);
+            MainWindowViewModel viewModel = new MainWindowViewModel();
             DataContext = viewModel;
         }
     }

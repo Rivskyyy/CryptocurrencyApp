@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:CryptocurrencyApp"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:system="clr-namespace:System;assembly=System.Runtime"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="MainWindow"
     Width="850"
@@ -14,8 +15,6 @@
     mc:Ignorable="d">
 
     <Grid>
-
-
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="228" />
             <ColumnDefinition />
@@ -27,7 +26,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Frame x:Name="MainFrame" />
+
 
         <ui:TitleBar
             Title="CryptocurrencyApp"
@@ -37,38 +36,32 @@
             FontWeight="Bold" />
 
         <DockPanel Grid.Row="1" Grid.Column="0">
-
             <ui:Card
-        Height="100"
-        Margin="0,30,0,0"
-        Background="#3b3b3b">
+                Height="100"
+                Margin="0,30,0,0"
+                Background="#3b3b3b">
                 <Grid>
-                  <ui:TextBox
-                Name="txtSearch"
-                Width="200"
-                Height="50"
-                Background="#292929"
-                FontSize="25"
-                Foreground="LightGray"
-                Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
-                VerticalContentAlignment="Center"
-                Padding="10,0,0,0"/>
-                    <TextBlock
-                        
-                Width="200"
-                
-                Text="Search..."
-                FontSize="25"
-                Foreground="DarkGray"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Left"
-               
-                Margin="10,0,0,0"
-                IsHitTestVisible="False"
-                Visibility="{Binding IsPlaceholderVisible, Converter={StaticResource BoolToVisibilityConverter}}"/>
-
-                    
-                  
+                    <ui:TextBox
+                        Name="txtSearch"
+                        Width="200"
+                        Height="50"
+                        Padding="10,0,0,0"
+                        VerticalContentAlignment="Center"
+                        Background="#292929"
+                        FontSize="25"
+                        Foreground="LightGray"
+                        PlaceholderText="Search...."
+                        Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
+                    <!--<TextBlock
+                        Width="200"
+                        Margin="10,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        FontSize="25"
+                        Foreground="DarkGray"
+                        IsHitTestVisible="False"
+                        Text="Search..."
+                        Visibility="{Binding IsPlaceholderVisible, Converter={StaticResource BoolToVisibilityConverter}}" />-->
                 </Grid>
             </ui:Card>
         </DockPanel>
@@ -90,6 +83,7 @@
                         Height="60"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Top"
+                        Command="{Binding NavigateToHomeCommand}"
                         FontSize="25">
                         <ui:Button.Content>
                             <StackPanel Orientation="Horizontal">
@@ -106,6 +100,7 @@
                         Height="60"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Top"
+                        Command="{Binding NavigateToSettingsCommand}"
                         FontSize="25">
                         <ui:Button.Content>
                             <StackPanel Orientation="Horizontal">
@@ -145,15 +140,14 @@
 
         </DockPanel>
         <DataGrid
-            HeadersVisibility="Column"
             Grid.Row="2"
             Grid.Column="1"
             AutoGenerateColumns="False"
+            CanUserAddRows="False"
+            HeadersVisibility="Column"
             IsReadOnly="True"
             ItemsSource="{Binding FilteredCryptoCurrency}"
-            SelectionMode="Single"
-            CanUserAddRows="False"
-            >
+            SelectionMode="Single">
 
             <DataGrid.Columns>
                 <DataGridTextColumn
@@ -219,5 +213,10 @@
                 </ui:SymbolIcon.Triggers>
             </ui:SymbolIcon>
         </Grid>
+
+        <Grid Grid.Row="2" Grid.Column="1">
+            <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" />
+        </Grid>
+
     </Grid>
 </ui:FluentWindow>
