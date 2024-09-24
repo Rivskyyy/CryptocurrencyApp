@@ -7,16 +7,19 @@ using CryptocurrencyApp.View;
 using Prism.Mvvm;
 using Prism.Commands;
 using System.Collections.ObjectModel;
-using System.Windows.Controls;
+using System.Configuration;
+using Wpf.Ui.Controls;
+using System.Windows;
 
 namespace CryptocurrencyApp.ViewModel
 {
     class MainWindowViewModel : BindableBase
     {
         private readonly CoinCapApiClient _coinCapApiClient = new CoinCapApiClient();
-        private readonly Frame _frame;
+        private readonly NavigationView _navigationView;
         private ObservableCollection<CryptoData> _cryptoCurrency;
         private ObservableCollection<CryptoData> _filteredCryptoCurrency;
+        private object _currentView;
         private string _searchText;
         private bool _isPlaceholderVisible = true;
         private bool _isLoading;
@@ -24,6 +27,8 @@ namespace CryptocurrencyApp.ViewModel
 
         public ICommand OpenDetailsWindowCommand { get; set; }
         public ICommand RefreshDataCommand { get; set; }
+        public ICommand NavigateToSettingsCommand { get; set; }
+        public ICommand NavigateToHomeCommand { get; set; }
 
         public ObservableCollection<CryptoData> CryptoCurrency
         {
@@ -34,6 +39,11 @@ namespace CryptocurrencyApp.ViewModel
         {
             get => _filteredCryptoCurrency;
             set => SetProperty(ref _filteredCryptoCurrency, value);
+        }
+        public object CurrentView
+        {
+            get => _currentView;
+            set => SetProperty(ref _currentView, value);
         }
         public string SearchText
         {
@@ -52,8 +62,41 @@ namespace CryptocurrencyApp.ViewModel
             get => _isPlaceholderVisible;
             set => SetProperty(ref _isPlaceholderVisible, value);
         }
+        public string ButtonText
+        {
+            get => _buttonText;
+            set => SetProperty(ref _buttonText, value);
+        }
+
+        public bool IsLoading
+        {
+            get => _isLoading;
+            set => SetProperty(ref _isLoading, value);
+        }
 
 
+        public MainWindowViewModel()
+        {
+
+            RefreshDataCommand = new DelegateCommand(LoadDataAsync, () => true);
+            OpenDetailsWindowCommand = new DelegateCommand<string>(OpenDetailsWindow, _ => true);
+            NavigateToSettingsCommand = new DelegateCommand(NavigateToSettings);
+           // NavigateToHomeCommand = new DelegateCommand(NavigateToHome);
+            CryptoCurrency = new ObservableCollection<CryptoData>();
+
+            LoadDataAsync();
+        }
+        private void NavigateToSettings()
+        {
+            
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                var settingsPage = new SettingsPage();
+                var mainWindow = Application.Current.MainWindow as MainWindow;
+                mainWindow.MainFrame.Navigate(settingsPage);
+            });
+        }
+        
         private void SearchCryptocurrency()
         {
             if (string.IsNullOrEmpty(SearchText))
@@ -68,28 +111,6 @@ namespace CryptocurrencyApp.ViewModel
             }
         }
 
-        public string ButtonText
-        {
-            get => _buttonText;
-            set => SetProperty(ref _buttonText, value);
-        }
-
-        public bool IsLoading
-        {
-            get => _isLoading;
-            set => SetProperty(ref _isLoading, value);
-        }
-
-        public MainWindowViewModel(Frame frame)
-        {
-            _frame = frame;
-            RefreshDataCommand = new DelegateCommand(LoadDataAsync, () => true);
-            OpenDetailsWindowCommand = new DelegateCommand<string>(OpenDetailsWindow, _ => true);
-
-            CryptoCurrency = new ObservableCollection<CryptoData>();
-
-            LoadDataAsync();
-        }
         private void OpenDetailsWindow(string id)
         {
             var detailsViewModel = new DetailsWindowViewModel(id);
