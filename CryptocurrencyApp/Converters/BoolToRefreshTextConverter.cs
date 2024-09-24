@@ -15,7 +15,7 @@ namespace CryptocurrencyApp.Converters
         {
             var isLoading = (bool)value;
           
-                return isLoading ? Visibility.Visible : Visibility.Collapsed;
+            return isLoading ? Visibility.Visible : Visibility.Collapsed;
            
         }
 
