@@ -22,49 +22,14 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="30" />
-            <RowDefinition Height="100" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-
-
-
         <ui:TitleBar
             Title="CryptocurrencyApp"
             Grid.ColumnSpan="2"
             Height="30"
             FontSize="15"
             FontWeight="Bold" />
-
-        <DockPanel Grid.Row="1" Grid.Column="0">
-            <ui:Card
-                Height="100"
-                Margin="0,30,0,0"
-                Background="#3b3b3b">
-                <Grid>
-                    <ui:TextBox
-                        Name="txtSearch"
-                        Width="200"
-                        Height="50"
-                        Padding="10,0,0,0"
-                        VerticalContentAlignment="Center"
-                        Background="#292929"
-                        FontSize="25"
-                        Foreground="LightGray"
-                        PlaceholderText="Search...."
-                        Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
-                    <!--<TextBlock
-                        Width="200"
-                        Margin="10,0,0,0"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Center"
-                        FontSize="25"
-                        Foreground="DarkGray"
-                        IsHitTestVisible="False"
-                        Text="Search..."
-                        Visibility="{Binding IsPlaceholderVisible, Converter={StaticResource BoolToVisibilityConverter}}" />-->
-                </Grid>
-            </ui:Card>
-        </DockPanel>
 
         <Grid
             Grid.Row="2"
@@ -111,107 +76,6 @@
                     </ui:Button>
                 </ui:Card>
             </StackPanel>
-
-
-        </Grid>
-
-        <DockPanel Grid.Row="1" Grid.Column="1">
-
-            <ui:Card Height="300" Margin="0,30,0,0">
-                <ui:Button
-                    Name="btnRefresh"
-                    Width="150"
-                    Height="50"
-                    Command="{Binding RefreshDataCommand}"
-                    FontSize="25">
-                    <ui:Button.Content>
-                        <StackPanel Orientation="Horizontal">
-                            <ui:SymbolIcon Margin="0,0,10,0" Symbol="ArrowSync12" />
-                            <TextBlock
-                                VerticalAlignment="Center"
-                                FontSize="25"
-                                Text="Refresh" />
-
-                        </StackPanel>
-
-                    </ui:Button.Content>
-                </ui:Button>
-            </ui:Card>
-
-        </DockPanel>
-        <DataGrid
-            Grid.Row="2"
-            Grid.Column="1"
-            AutoGenerateColumns="False"
-            CanUserAddRows="False"
-            HeadersVisibility="Column"
-            IsReadOnly="True"
-            ItemsSource="{Binding FilteredCryptoCurrency}"
-            SelectionMode="Single">
-
-            <DataGrid.Columns>
-                <DataGridTextColumn
-                    Binding="{Binding Rank}"
-                    FontSize="20"
-                    Header="Rank" />
-                <DataGridTextColumn
-                    Binding="{Binding Symbol}"
-                    FontSize="20"
-                    Header="Symbol" />
-                <DataGridTextColumn
-                    Binding="{Binding Name}"
-                    FontSize="20"
-                    Header="Name" />
-                <DataGridTemplateColumn Header="Datails">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <ui:Button
-                                Name="btnOpenDetails"
-                                Width="200"
-                                Command="{Binding DataContext.OpenDetailsWindowCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
-                                CommandParameter="{Binding Id}">
-                                <ui:Button.Content>
-                                    <TextBlock
-                                        HorizontalAlignment="Center"
-                                        VerticalAlignment="Center"
-                                        FontSize="20"
-                                        Text="Open" />
-
-                                </ui:Button.Content>
-                            </ui:Button>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
-
-        <Grid
-            Grid.Row="2"
-            Grid.Column="1"
-            Visibility="{Binding IsLoading, Converter={StaticResource BoolToRefreshTextConverter}}">
-            <ui:SymbolIcon
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                FontSize="70"
-                Symbol="ArrowSync12">
-                <ui:SymbolIcon.RenderTransform>
-                    <RotateTransform x:Name="rotateTransform" CenterX="35" CenterY="35" />
-                </ui:SymbolIcon.RenderTransform>
-                <ui:SymbolIcon.Triggers>
-                    <EventTrigger RoutedEvent="Loaded">
-                        <BeginStoryboard>
-                            <Storyboard RepeatBehavior="Forever">
-                                <DoubleAnimation
-                                    Storyboard.TargetName="rotateTransform"
-                                    Storyboard.TargetProperty="Angle"
-                                    From="0"
-                                    To="360"
-                                    Duration="0:0:2" />
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger>
-                </ui:SymbolIcon.Triggers>
-            </ui:SymbolIcon>
         </Grid>
 
         <Grid Grid.Row="2" Grid.Column="1">
