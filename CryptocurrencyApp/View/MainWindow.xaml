@@ -29,53 +29,72 @@
             Grid.ColumnSpan="2"
             Height="30"
             FontSize="15"
-            FontWeight="Bold" />
+            FontWeight="Bold"
+            Foreground="{DynamicResource PrimaryTextColor}" />
 
         <Grid
             Grid.Row="2"
             Width="228"
             HorizontalAlignment="Left">
-            <Border Background="#3b3b3b" />
-            <StackPanel
-                Width="228"
-                Height="400"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Top">
-                <ui:Card>
+            <!--<Border Background="#3b3b3b" />-->
+            <ui:Card VerticalAlignment="Top" Background="{DynamicResource BackgroundColor}">
+                <StackPanel
+                    Width="228"
+                    Height="Auto"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Background="{DynamicResource BackgroundColor}">
+
                     <ui:Button
                         Name="btnHome"
-                        Width="200"
+                        Width="180"
                         Height="60"
+                        Margin="8"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Top"
+                        Background="{DynamicResource BackgroundColor}"
+                        BorderBrush="{DynamicResource PrimaryTextColor}"
+                        BorderThickness="1"
                         Command="{Binding NavigateToHomeCommand}"
-                        FontSize="25">
+                        FontSize="25"
+                        Foreground="{DynamicResource PrimaryTextColor}">
                         <ui:Button.Content>
                             <StackPanel Orientation="Horizontal">
                                 <ui:SymbolIcon Margin="0,0,10,0" Symbol="Home32" />
-                                <TextBlock FontSize="20" Text="{DynamicResource Home}" />
+                                <TextBlock
+                                    FontSize="20"
+                                    Foreground="{DynamicResource PrimaryTextColor}"
+                                    Text="{DynamicResource Home}" />
                             </StackPanel>
                         </ui:Button.Content>
                     </ui:Button>
-                </ui:Card>
-                <ui:Card>
+
+
                     <ui:Button
                         Name="btnSettings"
-                        Width="200"
+                        Width="180"
                         Height="60"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Top"
+                        Background="{DynamicResource BackgroundColor}"
+                        BorderBrush="{DynamicResource PrimaryTextColor}"
+                        BorderThickness="1"
                         Command="{Binding NavigateToSettingsCommand}"
-                        FontSize="25">
+                        FontSize="25"
+                        Foreground="{DynamicResource PrimaryTextColor}">
                         <ui:Button.Content>
                             <StackPanel Orientation="Horizontal">
                                 <ui:SymbolIcon Margin="0,0,10,0" Symbol="Settings28" />
-                                <TextBlock FontSize="20" Text="Settings" />
+                                <TextBlock
+                                    FontSize="20"
+                                    Foreground="{DynamicResource PrimaryTextColor}"
+                                    Text="{DynamicResource Settings}" />
                             </StackPanel>
                         </ui:Button.Content>
                     </ui:Button>
-                </ui:Card>
-            </StackPanel>
+
+                </StackPanel>
+            </ui:Card>
         </Grid>
 
         <Grid Grid.Row="2" Grid.Column="1">

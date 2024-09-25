@@ -12,7 +12,8 @@
     d:DesignHeight="600"
     d:DesignWidth="600"
     mc:Ignorable="d">
-    <Grid Background="#292929">
+     <!--Background="#292929"-->
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -29,7 +30,7 @@
                 HorizontalAlignment="Center"
                 VerticalAlignment="Top"
                 FontSize="30"
-                Foreground="White"
+                Foreground="{DynamicResource PrimaryTextColor}"
                 Text="{DynamicResource Settings}" />
         </Grid>
 
@@ -39,13 +40,14 @@
                     Margin="12"
                     HorizontalAlignment="Left"
                     FontSize="25"
-                    Foreground="White"
+                    Foreground="{DynamicResource PrimaryTextColor}"
                     Text="{DynamicResource Language}" />
                 <ComboBox
                     Margin="12"
                     HorizontalAlignment="Left"
                     ItemsSource="{Binding Languages}"
-                    SelectedItem="{Binding Language}" />
+                    SelectedItem="{Binding Language}"
+                    Foreground="{DynamicResource PrimaryTextColor}"/>
 
             </StackPanel>
         </Grid>
@@ -55,14 +57,15 @@
                     Margin="12"
                     HorizontalAlignment="Left"
                     FontSize="25"
-                    Foreground="White"
+                    Foreground="{DynamicResource PrimaryTextColor}"
                     Text="{DynamicResource Theme}" />
                 <ui:ToggleSwitch
                 Name="ThemeToggleSwitch"
                 Margin="12"
-                Width="60"/>
-                <!--Checked="ThemeToggleSwitch_Checked"
-                Unchecked="ThemeToggleSwitch_Unchecked"-->
+                Width="60"
+                IsChecked="{Binding IsDarkTheme, Mode=TwoWay}"
+                Foreground="{DynamicResource PrimaryTextColor}"/>
+            
 
 
             </StackPanel>

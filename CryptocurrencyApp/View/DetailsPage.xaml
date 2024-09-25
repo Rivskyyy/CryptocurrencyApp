@@ -6,96 +6,125 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="HomePage"
-    Width="600"
-    Height="600"
-    Background="#292929"
+    Width="Auto"
+    Height="Auto"
+    d:DesignWidth="600"
+    d:DesignHeight="600"
+    Background="{DynamicResource BackgroundColor}"
     mc:Ignorable="d">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <ui:TitleBar Title="CryptocurrencyApp" FontWeight="Bold" />
-
-        <StackPanel Margin="0,40,0,0">
+        
+        <StackPanel Margin="8,26,0,0">
+            <ui:Button 
+                Name="btnBack"
+                Content="{DynamicResource Back}"
+                Height="50"
+                Width="100"
+                BorderThickness="1"
+                BorderBrush="{DynamicResource PrimaryTextColor}"
+                Command="{Binding NavigateToHomeCommand}"
+                Foreground="{DynamicResource PrimaryTextColor}"
+                Background="{DynamicResource BackgroundColor}"
+                
+                />
             <TextBlock
-                FontSize="16"
+                FontSize="20"
                 FontWeight="Bold"
+                Foreground="{DynamicResource PrimaryTextColor}"
                 Text="Name:" />
             <TextBlock
                 Name="Name"
                 Margin="0,0,0,10"
-                FontSize="14"
+                FontSize="20"
+                Foreground="{DynamicResource PrimaryTextColor}"
                 Text="{Binding CryptoDataDetail.Name}" />
 
             <TextBlock
-                FontSize="16"
+                FontSize="20"
                 FontWeight="Bold"
+                Foreground="{DynamicResource PrimaryTextColor}"
                 Text="Supply:" />
             <TextBlock
                 Name="Supply"
                 Margin="0,0,0,10"
-                FontSize="14"
+                FontSize="20"
+                Foreground="{DynamicResource PrimaryTextColor}"
                 Text="{Binding CryptoDataDetail.Supply}" />
 
             <TextBlock
-                FontSize="16"
+                FontSize="20"
                 FontWeight="Bold"
+                Foreground="{DynamicResource PrimaryTextColor}"
                 Text="Max Supply:" />
             <TextBlock
                 Name="MaxSupply"
                 Margin="0,0,0,10"
-                FontSize="14"
+                FontSize="20"
+                Foreground="{DynamicResource PrimaryTextColor}"
                 Text="{Binding CryptoDataDetail.MaxSupply}" />
 
             <TextBlock
-                FontSize="16"
+                FontSize="20"
                 FontWeight="Bold"
+                Foreground="{DynamicResource PrimaryTextColor}"
                 Text="Market Cap (USD):" />
             <TextBlock
                 Name="MarketCapUsd"
                 Margin="0,0,0,10"
-                FontSize="14"
+                FontSize="20"
+                Foreground="{DynamicResource PrimaryTextColor}"
                 Text="{Binding CryptoDataDetail.MarketCapUsd}" />
 
             <TextBlock
-                FontSize="16"
+                FontSize="20"
                 FontWeight="Bold"
+                Foreground="{DynamicResource PrimaryTextColor}"
                 Text="Volume (24 Hr USD):" />
             <TextBlock
                 Name="VolumeUsd24Hr"
                 Margin="0,0,0,10"
-                FontSize="14"
+                FontSize="20"
+                Foreground="{DynamicResource PrimaryTextColor}"
                 Text="{Binding CryptoDataDetail.VolumeUsd24Hr}" />
 
             <TextBlock
-                FontSize="16"
+                FontSize="20"
                 FontWeight="Bold"
+                Foreground="{DynamicResource PrimaryTextColor}"
                 Text="Price (USD):" />
             <TextBlock
                 Name="PriceUsd"
                 Margin="0,0,0,10"
-                FontSize="14"
+                FontSize="20"
+                Foreground="{DynamicResource PrimaryTextColor}"
                 Text="{Binding CryptoDataDetail.PriceUsd}" />
 
             <TextBlock
-                FontSize="16"
+                FontSize="20"
                 FontWeight="Bold"
+                Foreground="{DynamicResource PrimaryTextColor}"
                 Text="Change Percent (24 Hr):" />
             <TextBlock
                 Name="ChangePercent24Hr"
                 Margin="0,0,0,10"
-                FontSize="14"
+                FontSize="20"
+                Foreground="{DynamicResource PrimaryTextColor}"
                 Text="{Binding CryptoDataDetail.ChangePercent24Hr}" />
 
             <TextBlock
-                FontSize="16"
+                FontSize="20"
                 FontWeight="Bold"
+                Foreground="{DynamicResource PrimaryTextColor}"
                 Text="VWAP (24 Hr):" />
             <TextBlock
                 Name="Vwap24Hr"
                 Margin="0,0,0,10"
-                FontSize="14"
+                FontSize="20"
+                Foreground="{DynamicResource PrimaryTextColor}"
                 Text="{Binding CryptoDataDetail.Vwap24Hr}" />
         </StackPanel>
 
