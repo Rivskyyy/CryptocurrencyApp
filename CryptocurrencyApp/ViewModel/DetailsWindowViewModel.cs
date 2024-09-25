@@ -25,7 +25,6 @@ namespace CryptocurrencyApp.ViewModel
             get => _cryptoDataDetail;
             set => SetProperty(ref _cryptoDataDetail, value);
         }
-        public ICommand AddCommand { get; }
 
         public DetailsWindowViewModel(string id)
         {

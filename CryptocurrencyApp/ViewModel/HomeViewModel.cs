@@ -10,6 +10,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace CryptocurrencyApp.ViewModel
@@ -68,9 +69,10 @@ namespace CryptocurrencyApp.ViewModel
         public HomeViewModel()
         {
             RefreshDataCommand = new DelegateCommand(LoadDataAsync, () => true);
-            OpenDetailsWindowCommand = new DelegateCommand<string>(OpenDetailsWindow, _ => true);
+            OpenDetailsWindowCommand = new DelegateCommand<string>(NavigateToDetails, _ => true);
             CryptoCurrency = new ObservableCollection<CryptoData>();
             LoadDataAsync();
+           
         }
         private void SearchCryptocurrency()
         {
@@ -86,17 +88,21 @@ namespace CryptocurrencyApp.ViewModel
             }
         }
 
-        private void OpenDetailsWindow(string id)
+        private void NavigateToDetails(string id)
         {
-            var detailsViewModel = new DetailsWindowViewModel(id);
-            DetailsWindow detailsWindow = new DetailsWindow(id);
-            detailsWindow.Show();
+            if (!string.IsNullOrEmpty(id))
+            {
+                var detailsPage = new DetailsPage(id);
+                var mainWindow = Application.Current.MainWindow as MainWindow;
+                mainWindow.MainFrame.Navigate(detailsPage);
+            }
         }
 
         private async void LoadDataAsync()
         {
             IsLoading = true;
 
+            FilteredCryptoCurrency.Clear();
             CryptoCurrency.Clear();
 
             try
