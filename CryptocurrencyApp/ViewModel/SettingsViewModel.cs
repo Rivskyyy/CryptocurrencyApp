@@ -6,13 +6,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 
 namespace CryptocurrencyApp.ViewModel
 {
     public class SettingsViewModel : BindableBase
     {
         private string _language = "English";
+        private bool _isDarkTheme;
 
+        public bool IsDarkTheme
+        {
+            get => _isDarkTheme;
+            set
+            {
+                SetProperty(ref _isDarkTheme, value);
+                ApplyTheme();
+            }
+        }
         public string Language
         {
             get => _language;
@@ -32,6 +43,8 @@ namespace CryptocurrencyApp.ViewModel
                 "English",
                 "Ukrainian"
             };
+
+          
         }
 
         private void ChangeUILanguage(string oldLanguage, string newLanguage)
@@ -44,6 +57,30 @@ namespace CryptocurrencyApp.ViewModel
 
             Application.Current.Resources.MergedDictionaries.Remove(oldResDic);
             Application.Current.Resources.MergedDictionaries.Add(newResDic);
+        }
+        private void ApplyTheme()
+        {
+            if (_isDarkTheme)
+            {
+                Wpf.Ui.Appearance.ApplicationThemeManager.Apply(
+                    Wpf.Ui.Appearance.ApplicationTheme.Dark,
+                    Wpf.Ui.Controls.WindowBackdropType.Mica,
+                    true
+                );
+                Application.Current.Resources["PrimaryTextColor"] = new SolidColorBrush(Colors.White);
+                Application.Current.Resources["BackgroundColor"] = 
+                    new SolidColorBrush((Color)ColorConverter.ConvertFromString("#292929"));
+            }
+            else
+            {
+                Wpf.Ui.Appearance.ApplicationThemeManager.Apply(
+                    Wpf.Ui.Appearance.ApplicationTheme.Light,
+                    Wpf.Ui.Controls.WindowBackdropType.Mica,
+                    true
+                );
+                Application.Current.Resources["PrimaryTextColor"] = new SolidColorBrush(Colors.Black);
+                Application.Current.Resources["BackgroundColor"] = new SolidColorBrush(Colors.White);
+            }
         }
     }
 }
