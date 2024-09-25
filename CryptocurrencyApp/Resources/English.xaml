@@ -9,6 +9,8 @@
     <v:String x:Key="Refresh">Refresh</v:String>
     <v:String x:Key="Language">Language</v:String>
     <v:String x:Key="Theme">Theme</v:String>
+    <v:String x:Key="Open">Details</v:String>
+    <v:String x:Key="Back">Back</v:String>
    
 
 </ResourceDictionary>

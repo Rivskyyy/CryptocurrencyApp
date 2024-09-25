@@ -9,5 +9,7 @@
     <v:String x:Key="Refresh">Оновити</v:String>
     <v:String x:Key="Language">Мова</v:String>
     <v:String x:Key="Theme">Тема</v:String>
+    <v:String x:Key="Open">Деталі</v:String>
+    <v:String x:Key="Back">Назад</v:String>
 
 </ResourceDictionary>
