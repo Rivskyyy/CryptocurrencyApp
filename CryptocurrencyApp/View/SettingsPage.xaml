@@ -4,16 +4,18 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:CryptocurrencyApp.View"
-    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="SettingsPage"
-    mc:Ignorable="d"
-    Height="600" Width="450">
+    Width="450"
+    Height="600"
+    mc:Ignorable="d">
     <Grid Background="#292929">
         <TextBlock
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             FontSize="30"
             Text="Settings Page" />
+        <ComboBox ItemsSource="{Binding Languages}" SelectedItem="{Binding Language}" />
     </Grid>
 </Page>
