@@ -4,5 +4,10 @@
     xmlns:v="clr-namespace:System;assembly=mscorlib">
 
     <v:String x:Key="Home">Основна</v:String>
+    <v:String x:Key="Settings">Налаштування</v:String>
+    <v:String x:Key="Search">Пошук...</v:String>
+    <v:String x:Key="Refresh">Оновити</v:String>
+    <v:String x:Key="Language">Мова</v:String>
+    <v:String x:Key="Theme">Тема</v:String>
 
 </ResourceDictionary>
