@@ -23,7 +23,6 @@ namespace CryptocurrencyApp.ViewModel
         private string _searchText;
         private bool _isPlaceholderVisible = true;
         private bool _isLoading;
-        private string _buttonText = "Refresh";
 
         public ICommand OpenDetailsWindowCommand { get; set; }
         public ICommand RefreshDataCommand { get; set; }
@@ -43,11 +42,6 @@ namespace CryptocurrencyApp.ViewModel
         {
             get => _isPlaceholderVisible;
             set => SetProperty(ref _isPlaceholderVisible, value);
-        }
-        public string ButtonText
-        {
-            get => _buttonText;
-            set => SetProperty(ref _buttonText, value);
         }
 
         public bool IsLoading
