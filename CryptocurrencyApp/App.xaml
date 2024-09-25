@@ -1,21 +1,24 @@
-﻿<Application x:Class="CryptocurrencyApp.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:CryptocurrencyApp"
-             xmlns:converters="clr-namespace:CryptocurrencyApp.Converters"
-             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-             StartupUri="View/MainWindow.xaml">
+﻿<Application
+    x:Class="CryptocurrencyApp.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="clr-namespace:CryptocurrencyApp.Converters"
+    xmlns:local="clr-namespace:CryptocurrencyApp"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    StartupUri="View/MainWindow.xaml">
 
     <Application.Resources>
         <ResourceDictionary>
-          
+
             <converters:BoolToRefreshTextConverter x:Key="BoolToRefreshTextConverter" />
 
-            
             <ResourceDictionary.MergedDictionaries>
                 <ui:ThemesDictionary Theme="Dark" />
                 <ui:ControlsDictionary />
+
+                <ResourceDictionary Source="pack://application:,,,/CryptocurrencyApp;component/Resources/English.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>
