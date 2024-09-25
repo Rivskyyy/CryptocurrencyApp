@@ -7,15 +7,65 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="SettingsPage"
-    Width="450"
-    Height="600"
+    Width="Auto"
+    Height="Auto"
+    d:DesignHeight="600"
+    d:DesignWidth="600"
     mc:Ignorable="d">
     <Grid Background="#292929">
-        <TextBlock
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            FontSize="30"
-            Text="Settings Page" />
-        <ComboBox ItemsSource="{Binding Languages}" SelectedItem="{Binding Language}" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid
+            Name="Title"
+            Grid.Row="0"
+            Height="70"
+            VerticalAlignment="Top">
+            <ui:TextBlock
+                Margin="12"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                FontSize="30"
+                Foreground="White"
+                Text="{DynamicResource Settings}" />
+        </Grid>
+
+        <Grid Grid.Row="1" Height="Auto">
+            <StackPanel Orientation="Vertical">
+                <ui:TextBlock
+                    Margin="12"
+                    HorizontalAlignment="Left"
+                    FontSize="25"
+                    Foreground="White"
+                    Text="{DynamicResource Language}" />
+                <ComboBox
+                    Margin="12"
+                    HorizontalAlignment="Left"
+                    ItemsSource="{Binding Languages}"
+                    SelectedItem="{Binding Language}" />
+
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="2">
+            <StackPanel Orientation="Vertical">
+                <ui:TextBlock
+                    Margin="12"
+                    HorizontalAlignment="Left"
+                    FontSize="25"
+                    Foreground="White"
+                    Text="{DynamicResource Theme}" />
+                <ui:ToggleSwitch
+                Name="ThemeToggleSwitch"
+                Margin="12"
+                Width="60"/>
+                <!--Checked="ThemeToggleSwitch_Checked"
+                Unchecked="ThemeToggleSwitch_Unchecked"-->
+
+
+            </StackPanel>
+        </Grid>
     </Grid>
 </Page>
