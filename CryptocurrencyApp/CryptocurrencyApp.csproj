@@ -9,6 +9,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="NewFolder1\**" />
+    <Compile Remove="WNewFolder\**" />
+    <EmbeddedResource Remove="NewFolder1\**" />
+    <EmbeddedResource Remove="WNewFolder\**" />
+    <None Remove="NewFolder1\**" />
+    <None Remove="WNewFolder\**" />
+    <Page Remove="NewFolder1\**" />
+    <Page Remove="WNewFolder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Prism.Wpf" Version="8.0.0.1909" />
     <PackageReference Include="WPF-UI" Version="3.0.5" />

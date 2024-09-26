@@ -13,7 +13,7 @@ namespace CryptocurrencyApp.ViewModel
     public class SettingsViewModel : BindableBase
     {
         private string _language = "English";
-        private bool _isDarkTheme;
+        private bool _isDarkTheme = true;
 
         public bool IsDarkTheme
         {
@@ -44,7 +44,7 @@ namespace CryptocurrencyApp.ViewModel
                 "Ukrainian"
             };
 
-          
+            
         }
 
         private void ChangeUILanguage(string oldLanguage, string newLanguage)

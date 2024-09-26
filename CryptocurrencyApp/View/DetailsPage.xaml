@@ -45,15 +45,15 @@
                 <TextBlock FontSize="45" Style="{StaticResource DetailHeaderTextBlockStyle}" Text="{Binding CryptoDataDetail.Name}" />
             </StackPanel>
 
-            <!--  Використання стилю для значення  -->
+         
             <TextBlock Style="{StaticResource DetailHeaderTextBlockStyle}" Text="Price (USD):" />
             <TextBlock Style="{StaticResource DetailTextBlockStyle}" Text="{Binding CryptoDataDetail.PriceUsd, StringFormat=N2}" />
 
-            <!-- Volume (24 Hr USD) -->
+        
             <TextBlock Style="{StaticResource DetailHeaderTextBlockStyle}" Text="Volume (24 Hr USD):" />
             <TextBlock Style="{StaticResource DetailTextBlockStyle}" Text="{Binding CryptoDataDetail.VolumeUsd24Hr, StringFormat=N2}" />
 
-            <!-- Price Change (24 Hr) -->
+          
             <TextBlock Style="{StaticResource DetailHeaderTextBlockStyle}" Text="Change Percent (24 Hr):" />
             <TextBlock Style="{StaticResource DetailTextBlockStyle}" Text="{Binding CryptoDataDetail.ChangePercent24Hr, StringFormat=N2}" />
         </StackPanel>

@@ -20,7 +20,7 @@
                 <ui:ThemesDictionary Theme="Dark" />
                 
                 <ui:ControlsDictionary />
-                
+                <ResourceDictionary Source="Styles\DetailHeaderTextBlockStyle.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Resources/Theme/Dark.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Resources/Theme/Light.xaml" />
                 <!--<ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Resources/Wpf.Ui.xaml" />-->

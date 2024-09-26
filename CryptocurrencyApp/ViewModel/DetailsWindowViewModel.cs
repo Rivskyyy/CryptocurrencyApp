@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows;
 using Prism.Commands;
+using System.Collections.ObjectModel;
 
 namespace CryptocurrencyApp.ViewModel
 {
@@ -21,8 +22,14 @@ namespace CryptocurrencyApp.ViewModel
         private readonly HttpClient _httpClient;
         private readonly string _id;
         private CryptoDataDetail _cryptoDataDetail;
+        private ObservableCollection<CryptoMarkets> _cryptoMarkets;
         public ICommand NavigateToHomeCommand { get; set; }
 
+        public ObservableCollection<CryptoMarkets> CryptoMarkets
+        {
+            get => _cryptoMarkets;
+            set => SetProperty(ref _cryptoMarkets, value);
+        }
         public CryptoDataDetail CryptoDataDetail
         {
             get => _cryptoDataDetail;
@@ -31,15 +38,38 @@ namespace CryptocurrencyApp.ViewModel
 
         public DetailsWindowViewModel(string id)
         {
+            CryptoMarkets = new ObservableCollection<CryptoMarkets>();
             _id = id;
             LoadDetailsDataAsync();
+            LoadMarketDataAsync();
             NavigateToHomeCommand = new DelegateCommand(NavigateToHome);
         }
 
         private async void LoadDetailsDataAsync()
         {
             var result = await _coinCapApiClient.GetCurrencyDetailsAsync(_id);
-            CryptoDataDetail = result; 
+            CryptoDataDetail = result;
+           
+        }
+        private async void LoadMarketDataAsync()
+        {
+            try
+            {
+                var result = await _coinCapApiClient.GetCryptoMarketsAsync(_id);
+
+                // Перевірка на null перед додаванням
+                if (result != null)
+                {
+                    foreach (var market in result)
+                    {
+                        CryptoMarkets.Add(market);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error loading market data: {ex.Message}");
+            }
         }
 
         private void NavigateToHome()
