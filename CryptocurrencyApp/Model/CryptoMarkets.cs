@@ -17,4 +17,10 @@ namespace CryptocurrencyApp.Model
         public decimal PriceUsd { get; set; }
         public decimal VolumePercent { get; set; }
     }
+
+    public class CryptoMarkets2
+    {
+        public string ExchangeId { get; set; }
+        public string PriceUsd { get; set; }
+    }
 }
