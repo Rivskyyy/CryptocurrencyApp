@@ -11,4 +11,10 @@ namespace CryptocurrencyApp.Model
         public List<CryptoMarkets> Data { get; set; }
         public long Timestamp { get; set; }
     }
+
+    public class CryptoMarketsResponse2
+    {
+        public List<CryptoMarkets2> Data { get; set; }
+        public long Timestamp { get; set; }
+    }
 }
