@@ -26,7 +26,7 @@ namespace CryptocurrencyApp.APIs
 
                 Debug.WriteLine("Data loaded successfully.");
 
-                await Task.Delay(2000);
+                //await Task.Delay(2000);
 
                 var cryptoResponse = await response.Content.ReadFromJsonAsync<CryptoResponse>();
 
@@ -56,6 +56,29 @@ namespace CryptocurrencyApp.APIs
 
 
                 return cryptoDetailResponse.Data;
+            }
+            catch (HttpRequestException e)
+            {
+
+                MessageBox.Show("Could not load data.", $"Error:{e}", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                return null;
+            }
+        }
+
+        public async Task<List<CryptoMarkets>?> GetCryptoMarketsAsync(string currencyId)
+        {
+            try
+            {
+                var response = await _httpClient.GetAsync($"assets/{currencyId}/markets");
+                response.EnsureSuccessStatusCode();
+
+                Debug.WriteLine("Data loaded successfully.");
+
+                var cryptoMarketResponse = await response.Content.ReadFromJsonAsync<CryptoMarketsResponse>();
+
+
+                return cryptoMarketResponse.Data;
             }
             catch (HttpRequestException e)
             {
