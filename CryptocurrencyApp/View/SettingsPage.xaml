@@ -17,24 +17,11 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Grid
-            Name="Title"
-            Grid.Row="0"
-            Height="70"
-            VerticalAlignment="Top">
-            <ui:TextBlock
-                Margin="12"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Top"
-                FontSize="30"
-                Foreground="{DynamicResource PrimaryTextColor}"
-                Text="{DynamicResource Settings}" />
-        </Grid>
+    
 
-        <Grid Grid.Row="1" Height="Auto">
+        <Grid Grid.Row="0" Height="Auto">
             <StackPanel Orientation="Vertical">
                 <ui:TextBlock
                     Margin="12"
@@ -51,7 +38,7 @@
 
             </StackPanel>
         </Grid>
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="1">
             <StackPanel Orientation="Vertical">
                 <ui:TextBlock
                     Margin="12"
