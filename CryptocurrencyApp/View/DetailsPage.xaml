@@ -20,8 +20,14 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
         <StackPanel
             Grid.Row="0"
+            
             Margin="0,0,0,20"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
@@ -35,54 +41,72 @@
         </StackPanel>
 
 
-        <StackPanel
-            Margin="0,10,0,0"
-          
-            VerticalAlignment="Top">
-            
-            <StackPanel Width="250" Margin="0,10" HorizontalAlignment="Center">
+        <StackPanel Margin="0,10,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2">
 
-                <TextBlock FontSize="45" Style="{StaticResource DetailHeaderTextBlockStyle}" Text="{Binding CryptoDataDetail.Name}" />
+            <StackPanel
+                Width="250"
+                Margin="0,10"
+                HorizontalAlignment="Center">
+
+                <TextBlock
+                    FontSize="45"
+                    Style="{StaticResource DetailHeaderTextBlockStyle}"
+                    Text="{Binding CryptoDataDetail.Name}" />
             </StackPanel>
 
-         
+
             <TextBlock Style="{StaticResource DetailHeaderTextBlockStyle}" Text="Price (USD):" />
             <TextBlock Style="{StaticResource DetailTextBlockStyle}" Text="{Binding CryptoDataDetail.PriceUsd, StringFormat=N2}" />
 
-        
+
             <TextBlock Style="{StaticResource DetailHeaderTextBlockStyle}" Text="Volume (24 Hr USD):" />
             <TextBlock Style="{StaticResource DetailTextBlockStyle}" Text="{Binding CryptoDataDetail.VolumeUsd24Hr, StringFormat=N2}" />
 
-          
+
             <TextBlock Style="{StaticResource DetailHeaderTextBlockStyle}" Text="Change Percent (24 Hr):" />
             <TextBlock Style="{StaticResource DetailTextBlockStyle}" Text="{Binding CryptoDataDetail.ChangePercent24Hr, StringFormat=N2}" />
         </StackPanel>
 
-
         <DataGrid
-            Grid.Row="1"
-            Width="Auto"
-            Margin="0,0,0,0"
-            HorizontalAlignment="Stretch"
-            AutoGenerateColumns="False"
-            Background="{DynamicResource BackgroundColor}"
-            CanUserAddRows="False"
-            CanUserDeleteRows="False"
-            
-            Foreground="{DynamicResource PrimaryTextColor}"
-            GridLinesVisibility="None"
-            HeadersVisibility="Column"
-            IsReadOnly="True"
-            ItemsSource="{Binding CryptoMarkets}">
+    Grid.Row="1"
+    Grid.Column="0"
+    Width="Auto"
+    Margin="0,0,0,0"
+    HorizontalAlignment="Stretch"
+    AutoGenerateColumns="False"
+    Background="{DynamicResource BackgroundColor}"
+    CanUserAddRows="False"
+    CanUserDeleteRows="False"
+    Foreground="{DynamicResource PrimaryTextColor}"
+    GridLinesVisibility="None"
+    HeadersVisibility="Column"
+    IsReadOnly="True"
+    ItemsSource="{Binding CombinedCryptoMarketData}">
+
             <DataGrid.Columns>
                 <DataGridTextColumn
-                    Width="*"
-                    Binding="{Binding ExchangeId}"
-                    Header="Exchange ID" />
+            Width="*"
+            Binding="{Binding ExchangeId}"
+            Header="Exchange ID" />
+                <DataGridTemplateColumn Header="Exchange URL" Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock>
+                                <TextBlock.Inlines>
+                                    <Hyperlink Command="{Binding DataContext.OpenLinkCommand, RelativeSource={RelativeSource AncestorType=Page}}"
+                               CommandParameter="{Binding ExchangeUrl}">
+                                        <Run Text="{Binding ExchangeUrl}" />
+                                    </Hyperlink>
+                                </TextBlock.Inlines>
+                            </TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
                 <DataGridTextColumn
-                    Width="*"
-                    Binding="{Binding PriceUsd, StringFormat=N2}"
-                    Header="Price (USD)" />
+            Width="*"
+            Binding="{Binding PriceUsd, StringFormat=N2}"
+            Header="Price (USD)" />
             </DataGrid.Columns>
         </DataGrid>
 
