@@ -36,7 +36,7 @@ namespace CryptocurrencyApp.APIs
             }
             catch (HttpRequestException e)
             {
-
+                //delete
                 MessageBox.Show("Could not load data.", $"Error:{e}", MessageBoxButton.OK, MessageBoxImage.Error);
 
                 return new List<CryptoData>();
@@ -66,7 +66,7 @@ namespace CryptocurrencyApp.APIs
             }
         }
 
-        public async Task<List<CryptoMarkets>?> GetCryptoMarketsAsync(string currencyId)
+        public async Task<List<CryptoMarkets2>?> GetCryptoMarketsAsync(string currencyId)
         {
             try
             {
@@ -75,7 +75,30 @@ namespace CryptocurrencyApp.APIs
 
                 Debug.WriteLine("Data loaded successfully.");
 
-                var cryptoMarketResponse = await response.Content.ReadFromJsonAsync<CryptoMarketsResponse>();
+                var cryptoMarketResponse = await response.Content.ReadFromJsonAsync<CryptoMarketsResponse2>();
+
+
+                return cryptoMarketResponse.Data;
+            }
+            catch (HttpRequestException e)
+            {
+
+               // MessageBox.Show("Could not load data.", $"Error:{e}", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                return null;
+            }
+        }
+
+     /*   public async Task<List<CryptoMarkets2>?> GetCryptoMarketsAsync2(string currencyId)
+        {
+            try
+            {
+                var response = await _httpClient.GetAsync($"markets?assetId={currencyId}");
+                response.EnsureSuccessStatusCode();
+
+                Debug.WriteLine("Data loaded successfully.");
+
+                var cryptoMarketResponse = await response.Content.ReadFromJsonAsync<CryptoMarketsResponse2>();
 
 
                 return cryptoMarketResponse.Data;
@@ -87,6 +110,26 @@ namespace CryptocurrencyApp.APIs
 
                 return null;
             }
-        }
+        }*/
+        
+        public async Task<MarketDataDetail?> GetMarketDetail(string exchangeId)
+        {
+            try
+            {
+                var response = await _httpClient.GetAsync($"exchanges/{exchangeId}");
+                response.EnsureSuccessStatusCode();
+
+                var marketResponse = await response.Content.ReadFromJsonAsync<MarketResponse>();
+
+                return marketResponse.Data;
+            }
+            catch (HttpRequestException e)
+            {
+
+                //MessageBox.Show("Could not load data.", $"Error:{e}", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                return null;
+            }
+}
     }
 }
