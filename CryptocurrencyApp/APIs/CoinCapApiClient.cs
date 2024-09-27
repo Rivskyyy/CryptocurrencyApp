@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using System.Net.Http;
 using System.Net.Http.Json;
-using System.Windows;
 
 namespace CryptocurrencyApp.APIs
 {
@@ -17,7 +16,10 @@ namespace CryptocurrencyApp.APIs
                 BaseAddress = new Uri("https://api.coincap.io/v2/")
             };
         }
-        //Get the top cryptocurrencies 
+
+        /// <summary>
+        /// Get the top cryptocurrencies 
+        /// </summary>
         public async Task<List<CryptoData>> GetCurrenciesAsync()
         {
             try
@@ -25,8 +27,6 @@ namespace CryptocurrencyApp.APIs
                 var response = await _httpClient.GetAsync("assets");
 
                 Debug.WriteLine("Data loaded successfully.");
-
-                //await Task.Delay(2000);
 
                 var cryptoResponse = await response.Content.ReadFromJsonAsync<CryptoResponse>();
 
@@ -36,12 +36,14 @@ namespace CryptocurrencyApp.APIs
             }
             catch (HttpRequestException e)
             {
-                
                 Debug.WriteLine($"Error loading data: {e.Message}");
                 return new List<CryptoData>();
             }
         }
-        //Get the details about crypto
+
+        /// <summary>
+        /// Get the details about crypto
+        /// </summary>
         public async Task<CryptoDataDetail?> GetCurrencyDetailsAsync(string currencyId)
         {
             try
@@ -53,7 +55,6 @@ namespace CryptocurrencyApp.APIs
 
                 var cryptoDetailResponse = await response.Content.ReadFromJsonAsync<CryptoDetailResponse>();
 
-
                 return cryptoDetailResponse.Data;
             }
             catch (HttpRequestException e)
@@ -62,7 +63,10 @@ namespace CryptocurrencyApp.APIs
                 return null;
             }
         }
-        // Get the exchanges by id
+
+        /// <summary>
+        /// Get the exchanges by id
+        /// </summary>
         public async Task<List<CryptoMarkets>?> GetCryptoMarketsAsync(string currencyId)
         {
             try
@@ -74,7 +78,6 @@ namespace CryptocurrencyApp.APIs
 
                 var cryptoMarketResponse = await response.Content.ReadFromJsonAsync<CryptoMarketsResponse>();
 
-
                 return cryptoMarketResponse.Data;
             }
             catch (HttpRequestException e)
@@ -83,7 +86,10 @@ namespace CryptocurrencyApp.APIs
                 return null;
             }
         }
-        //Get the exchange's url
+        
+        /// <summary>
+        /// Get the exchange's url
+        /// </summary>
         public async Task<MarketDataDetail?> GetMarketDetail(string exchangeId)
         {
             try

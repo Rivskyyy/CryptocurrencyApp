@@ -18,8 +18,7 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <ui:Card Height="100" Background="{DynamicResource BackgroundColor}" > <!--Background="#3b3b3b"-->
-               
+        <ui:Card Height="100" Background="{DynamicResource BackgroundColor}">
             <StackPanel Grid.Row="0" Orientation="Horizontal">
 
                 <ui:TextBox
@@ -29,29 +28,22 @@
                     Margin="8"
                     Padding="10,0,0,0"
                     VerticalContentAlignment="Center"
-                    BorderThickness="1"
                     BorderBrush="{DynamicResource PrimaryTextColor}"
+                    BorderThickness="1"
                     FontSize="20"
-                    
                     PlaceholderText="{DynamicResource Search}"
-                    
-                    Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" 
-                   
-                    />
-    <!--Background="#292929"-->
+                    Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
                 <ui:Button
-                    
                     Name="btnRefresh"
                     Width="150"
                     Height="50"
                     Margin="8"
-                    BorderThickness="1"
+                    Background="{DynamicResource BackgroundColor}"
                     BorderBrush="{DynamicResource PrimaryTextColor}"
+                    BorderThickness="1"
                     Command="{Binding RefreshDataCommand}"
                     FontSize="25"
-                    Foreground="{DynamicResource PrimaryTextColor}"
-                    Background="{DynamicResource BackgroundColor}"
-                    >
+                    Foreground="{DynamicResource PrimaryTextColor}">
                     <ui:Button.Content>
                         <StackPanel Orientation="Horizontal">
 
@@ -59,41 +51,37 @@
                             <TextBlock
                                 VerticalAlignment="Center"
                                 FontSize="20"
-                                Text="{DynamicResource Refresh}" Foreground="{DynamicResource PrimaryTextColor}"/>
+                                Foreground="{DynamicResource PrimaryTextColor}"
+                                Text="{DynamicResource Refresh}" />
                         </StackPanel>
-
                     </ui:Button.Content>
                 </ui:Button>
             </StackPanel>
         </ui:Card>
         <DataGrid
             Grid.Row="1"
-            
             AutoGenerateColumns="False"
+            Background="{DynamicResource BackgroundColor}"
             CanUserAddRows="False"
+            Foreground="{DynamicResource PrimaryTextColor}"
             HeadersVisibility="Column"
             IsReadOnly="True"
             ItemsSource="{Binding FilteredCryptoCurrency}"
-            SelectionMode="Single"
-            Background="{DynamicResource BackgroundColor}"
-            Foreground="{DynamicResource PrimaryTextColor}">
-            
+            SelectionMode="Single">
+
             <DataGrid.Columns>
                 <DataGridTextColumn
                     Binding="{Binding Rank}"
                     FontSize="20"
-                    Header="Rank" 
-                   />
+                    Header="Rank" />
                 <DataGridTextColumn
                     Binding="{Binding Symbol}"
                     FontSize="20"
-                    Header="Symbol" 
-                 />
+                    Header="Symbol" />
                 <DataGridTextColumn
                     Binding="{Binding Name}"
                     FontSize="20"
-                    Header="Name"
-                 />
+                    Header="Name" />
                 <DataGridTemplateColumn Header="Datails">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -101,19 +89,17 @@
                                 Name="btnOpenDetails"
                                 Width="200"
                                 Background="{DynamicResource BackgroundColor}"
-                                Command="{Binding DataContext.OpenDetailsWindowCommand, RelativeSource={RelativeSource AncestorType={x:Type Page}}}"
-                                CommandParameter="{Binding Id}"
-                                BorderThickness="1"
                                 BorderBrush="{DynamicResource PrimaryTextColor}"
-                                >
+                                BorderThickness="1"
+                                Command="{Binding DataContext.OpenDetailsWindowCommand, RelativeSource={RelativeSource AncestorType={x:Type Page}}}"
+                                CommandParameter="{Binding Id}">
                                 <ui:Button.Content>
                                     <TextBlock
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         FontSize="20"
-                                        Text="{DynamicResource Open}" 
-                                        Foreground="{DynamicResource PrimaryTextColor}"/>
-
+                                        Foreground="{DynamicResource PrimaryTextColor}"
+                                        Text="{DynamicResource Open}" />
                                 </ui:Button.Content>
                             </ui:Button>
                         </DataTemplate>

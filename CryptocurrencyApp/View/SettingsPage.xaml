@@ -12,14 +12,11 @@
     d:DesignHeight="600"
     d:DesignWidth="600"
     mc:Ignorable="d">
-     <!--Background="#292929"-->
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-
-    
 
         <Grid Grid.Row="0" Height="Auto">
             <StackPanel Orientation="Vertical">
@@ -32,10 +29,9 @@
                 <ComboBox
                     Margin="12"
                     HorizontalAlignment="Left"
+                    Foreground="{DynamicResource PrimaryTextColor}"
                     ItemsSource="{Binding Languages}"
-                    SelectedItem="{Binding Language}"
-                    Foreground="{DynamicResource PrimaryTextColor}"/>
-
+                    SelectedItem="{Binding Language}" />
             </StackPanel>
         </Grid>
         <Grid Grid.Row="1">
@@ -47,14 +43,11 @@
                     Foreground="{DynamicResource PrimaryTextColor}"
                     Text="{DynamicResource Theme}" />
                 <ui:ToggleSwitch
-                Name="ThemeToggleSwitch"
-                Margin="12"
-                Width="60"
-                IsChecked="{Binding IsDarkTheme, Mode=TwoWay}"
-                Foreground="{DynamicResource PrimaryTextColor}"/>
-            
-
-
+                    Name="ThemeToggleSwitch"
+                    Width="60"
+                    Margin="12"
+                    Foreground="{DynamicResource PrimaryTextColor}"
+                    IsChecked="{Binding IsDarkTheme, Mode=TwoWay}" />
             </StackPanel>
         </Grid>
     </Grid>

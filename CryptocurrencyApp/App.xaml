@@ -9,23 +9,18 @@
 
     <Application.Resources>
         <ResourceDictionary>
-            
+
             <SolidColorBrush x:Key="PrimaryTextColor" Color="White" />
             <SolidColorBrush x:Key="BackgroundColor" Color="#292929" />
 
             <converters:BoolToRefreshTextConverter x:Key="BoolToRefreshTextConverter" />
 
             <ResourceDictionary.MergedDictionaries>
-                
-                <ui:ThemesDictionary Theme="Dark" />
-                
                 <ui:ControlsDictionary />
-                <ResourceDictionary Source="Styles\DetailHeaderTextBlockStyle.xaml"/>
+
+                <ResourceDictionary Source="Styles\DetailHeaderTextBlockStyle.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Resources/Theme/Dark.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Resources/Theme/Light.xaml" />
-                <!--<ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Resources/Wpf.Ui.xaml" />-->
-                
-                
 
                 <ResourceDictionary Source="pack://application:,,,/CryptocurrencyApp;component/Resources/English.xaml" />
             </ResourceDictionary.MergedDictionaries>

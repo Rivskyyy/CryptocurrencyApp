@@ -36,7 +36,6 @@
             Grid.Row="2"
             Width="Auto"
             HorizontalAlignment="Left">
-            <!--<Border Background="#3b3b3b" />-->
             <ui:Card VerticalAlignment="Top" Background="{DynamicResource BackgroundColor}">
                 <StackPanel
                     Width="300"
@@ -50,7 +49,6 @@
                         Width="170"
                         Height="60"
                         Margin="8"
-                        
                         HorizontalAlignment="Center"
                         VerticalAlignment="Top"
                         Background="{DynamicResource BackgroundColor}"
@@ -69,7 +67,6 @@
                             </StackPanel>
                         </ui:Button.Content>
                     </ui:Button>
-
 
                     <ui:Button
                         Name="btnSettings"

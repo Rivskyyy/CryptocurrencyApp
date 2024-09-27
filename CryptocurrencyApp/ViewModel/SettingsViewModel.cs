@@ -38,8 +38,6 @@ namespace CryptocurrencyApp.ViewModel
                 "English",
                 "Ukrainian"
             };
-
-            
         }
         private void ChangeUILanguage(string oldLanguage, string newLanguage)
         {

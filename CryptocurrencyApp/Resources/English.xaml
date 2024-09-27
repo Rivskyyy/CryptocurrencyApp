@@ -17,5 +17,4 @@
     <v:String x:Key="ExchangeID">Name</v:String>
     <v:String x:Key="ExchangeURL">Link:</v:String>
 
-
 </ResourceDictionary>

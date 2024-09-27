@@ -3,7 +3,6 @@ using Prism.Commands;
 using Prism.Mvvm;
 using System.Windows;
 using System.Windows.Input;
-using Wpf.Ui.Controls;
 
 namespace CryptocurrencyApp.ViewModel
 {
@@ -11,8 +10,6 @@ namespace CryptocurrencyApp.ViewModel
     {
         private readonly HomePage _homePage;
         private readonly SettingsPage _settingsPage;
-        private readonly NavigationView _navigationView;
-        private object _currentView;
      
         public ICommand NavigateToSettingsCommand { get; set; }
         public ICommand NavigateToHomeCommand { get; set; }

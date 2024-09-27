@@ -16,7 +16,6 @@ namespace CryptocurrencyApp.ViewModel
         private ObservableCollection<CryptoData> _cryptoCurrency;
         private ObservableCollection<CryptoData> _filteredCryptoCurrency;
         private string _searchText;
-        private bool _isPlaceholderVisible = true;
         private bool _isLoading;
 
         public ICommand OpenDetailsWindowCommand { get; set; }
@@ -29,14 +28,7 @@ namespace CryptocurrencyApp.ViewModel
                 SetProperty(ref _searchText, value);
                 SearchCryptocurrency();
                 Console.WriteLine($"Search query changed: {value}");
-                IsPlaceholderVisible = string.IsNullOrEmpty(value);
             }
-        }
-
-        public bool IsPlaceholderVisible
-        {
-            get => _isPlaceholderVisible;
-            set => SetProperty(ref _isPlaceholderVisible, value);
         }
 
         public bool IsLoading
@@ -50,15 +42,17 @@ namespace CryptocurrencyApp.ViewModel
             get => _cryptoCurrency;
             set => SetProperty(ref _cryptoCurrency, value);
         }
+
         public ObservableCollection<CryptoData> FilteredCryptoCurrency
         {
             get => _filteredCryptoCurrency;
             set => SetProperty(ref _filteredCryptoCurrency, value);
         }
+
         public HomeViewModel()
         {
-            RefreshDataCommand = new DelegateCommand(LoadDataAsync, () => true);
-            OpenDetailsWindowCommand = new DelegateCommand<string>(NavigateToDetails, _ => true);
+            RefreshDataCommand = new DelegateCommand(LoadDataAsync);
+            OpenDetailsWindowCommand = new DelegateCommand<string>(NavigateToDetails);
             CryptoCurrency = new ObservableCollection<CryptoData>();
             FilteredCryptoCurrency = new ObservableCollection<CryptoData>();
             LoadDataAsync();
@@ -72,8 +66,8 @@ namespace CryptocurrencyApp.ViewModel
             }
             else
             {
-                var filtered = CryptoCurrency.Where(c => c.Name.Contains(SearchText, StringComparison.OrdinalIgnoreCase) ||
-                c.Id.Contains(SearchText, StringComparison.OrdinalIgnoreCase));
+                var filtered = CryptoCurrency.Where(c => c.Name.Contains(SearchText, StringComparison.OrdinalIgnoreCase)
+                    || c.Id.Contains(SearchText, StringComparison.OrdinalIgnoreCase));
                 FilteredCryptoCurrency = new ObservableCollection<CryptoData>(filtered);
             }
         }
@@ -107,7 +101,6 @@ namespace CryptocurrencyApp.ViewModel
             {
                 MessageBox.Show("Could not load data.", $"Error:{e}", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            
             finally
             {
                 IsLoading = false;

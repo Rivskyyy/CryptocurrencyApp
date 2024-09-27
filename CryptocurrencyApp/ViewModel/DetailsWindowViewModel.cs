@@ -5,7 +5,6 @@ using Prism.Commands;
 using Prism.Mvvm;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Net.Http;
 using System.Windows;
 using System.Windows.Input;
 
@@ -14,7 +13,6 @@ namespace CryptocurrencyApp.ViewModel
     internal class DetailsWindowViewModel : BindableBase
     {
         private readonly CoinCapApiClient _coinCapApiClient = new CoinCapApiClient();
-        private readonly HttpClient _httpClient;
         private readonly string _id;
         private CryptoDataDetail _cryptoDataDetail;
 
