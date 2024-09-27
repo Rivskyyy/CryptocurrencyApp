@@ -55,21 +55,21 @@
             </StackPanel>
 
 
-            <TextBlock Style="{StaticResource DetailHeaderTextBlockStyle}" Text="Price (USD):" />
+            <TextBlock Style="{StaticResource DetailHeaderTextBlockStyle}" Text="{DynamicResource Price}" />
             <TextBlock Style="{StaticResource DetailTextBlockStyle}" Text="{Binding CryptoDataDetail.PriceUsd, StringFormat=N2}" />
 
 
-            <TextBlock Style="{StaticResource DetailHeaderTextBlockStyle}" Text="Volume (24 Hr USD):" />
+            <TextBlock Style="{StaticResource DetailHeaderTextBlockStyle}" Text="{DynamicResource Volume}" />
             <TextBlock Style="{StaticResource DetailTextBlockStyle}" Text="{Binding CryptoDataDetail.VolumeUsd24Hr, StringFormat=N2}" />
 
 
-            <TextBlock Style="{StaticResource DetailHeaderTextBlockStyle}" Text="Change Percent (24 Hr):" />
+            <TextBlock Style="{StaticResource DetailHeaderTextBlockStyle}" Text="{DynamicResource PriceChange}" />
             <TextBlock Style="{StaticResource DetailTextBlockStyle}" Text="{Binding CryptoDataDetail.ChangePercent24Hr, StringFormat=N2}" />
         </StackPanel>
 
         <DataGrid
     Grid.Row="1"
-    Grid.Column="0"
+    Grid.ColumnSpan="2"
     Width="Auto"
     Margin="0,0,0,0"
     HorizontalAlignment="Stretch"
@@ -87,8 +87,12 @@
                 <DataGridTextColumn
             Width="*"
             Binding="{Binding ExchangeId}"
-            Header="Exchange ID" />
-                <DataGridTemplateColumn Header="Exchange URL" Width="*">
+            Header="{DynamicResource ExchangeID}" />
+                    <DataGridTextColumn
+            Width="*"
+            Binding="{Binding PriceUsd, StringFormat=N2}"
+            Header="{DynamicResource Price}" />
+                <DataGridTemplateColumn Header="{DynamicResource ExchangeURL}" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock>
@@ -103,10 +107,7 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
-                <DataGridTextColumn
-            Width="*"
-            Binding="{Binding PriceUsd, StringFormat=N2}"
-            Header="Price (USD)" />
+            
             </DataGrid.Columns>
         </DataGrid>
 
