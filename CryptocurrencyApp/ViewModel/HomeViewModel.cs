@@ -51,7 +51,7 @@ namespace CryptocurrencyApp.ViewModel
 
         public HomeViewModel()
         {
-            RefreshDataCommand = new DelegateCommand(LoadDataAsync);
+            RefreshDataCommand = new DelegateCommand(LoadDataAsync, () => !IsLoading).ObservesProperty(() => IsLoading);
             OpenDetailsWindowCommand = new DelegateCommand<string>(NavigateToDetails);
             CryptoCurrency = new ObservableCollection<CryptoData>();
             FilteredCryptoCurrency = new ObservableCollection<CryptoData>();
