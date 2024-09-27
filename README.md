@@ -28,3 +28,8 @@ This application provides various information related to cryptocurrencies, devel
 - **WPF UI** for user interface design
 - **[CoinCap API Documentation](https://docs.coincap.io/)** for cryptocurrency data retrieval
 
+![](assets/CryptocurrencyApp.gif)
+![](assets/cryptoApp_1.png)
+![](assets/cryptoApp_2.png)
+![](assets/cryptoApp_3.png)
+![](assets/cryptoApp_4.png)
