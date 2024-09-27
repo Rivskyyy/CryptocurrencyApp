@@ -4,6 +4,8 @@
 
 This application provides various information related to cryptocurrencies, developed using **C#** and **.NET WPF** technologies. The application utilizes the **CoinCap API** to fetch real-time cryptocurrency data.
 
+![](assets/CryptocurrencyApp.gif)
+
 ## Features
 
 - Multi-page application with navigation.
@@ -28,7 +30,7 @@ This application provides various information related to cryptocurrencies, devel
 - **WPF UI** for user interface design
 - **[CoinCap API Documentation](https://docs.coincap.io/)** for cryptocurrency data retrieval
 
-![](assets/CryptocurrencyApp.gif)
+
 ![](assets/cryptoApp_1.jpg)
 ![](assets/cryptoApp_2.jpg)
 ![](assets/cryptoApp_3.jpg)
