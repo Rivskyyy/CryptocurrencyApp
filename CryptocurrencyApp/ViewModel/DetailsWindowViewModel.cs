@@ -53,9 +53,16 @@ namespace CryptocurrencyApp.ViewModel
         }
         private void OpenLink(string url)
         {
-            if (!string.IsNullOrEmpty(url))
+            if (string.IsNullOrEmpty(url))
+                return;
+
+            try
             {
                 Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show("Could not open link.", $"Error:{e}", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         private async void LoadDetailsDataAsync()
