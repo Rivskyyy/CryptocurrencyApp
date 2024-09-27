@@ -28,6 +28,7 @@ This application provides various information related to cryptocurrencies, devel
 - **C#**
 - **.NET WPF**
 - **WPF UI** for user interface design
+- **Prism** 
 - **[CoinCap API Documentation](https://docs.coincap.io/)** for cryptocurrency data retrieval
 
 
