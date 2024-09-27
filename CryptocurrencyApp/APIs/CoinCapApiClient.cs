@@ -17,7 +17,7 @@ namespace CryptocurrencyApp.APIs
                 BaseAddress = new Uri("https://api.coincap.io/v2/")
             };
         }
-
+        //Get the top cryptocurrencies 
         public async Task<List<CryptoData>> GetCurrenciesAsync()
         {
             try
@@ -36,13 +36,12 @@ namespace CryptocurrencyApp.APIs
             }
             catch (HttpRequestException e)
             {
-                //delete
-                MessageBox.Show("Could not load data.", $"Error:{e}", MessageBoxButton.OK, MessageBoxImage.Error);
-
+                
+                Debug.WriteLine($"Error loading data: {e.Message}");
                 return new List<CryptoData>();
             }
         }
-
+        //Get the details about crypto
         public async Task<CryptoDataDetail?> GetCurrencyDetailsAsync(string currencyId)
         {
             try
@@ -59,14 +58,12 @@ namespace CryptocurrencyApp.APIs
             }
             catch (HttpRequestException e)
             {
-
-                MessageBox.Show("Could not load data.", $"Error:{e}", MessageBoxButton.OK, MessageBoxImage.Error);
-
+                Debug.WriteLine($"Error loading data: {e.Message}");
                 return null;
             }
         }
-
-        public async Task<List<CryptoMarkets2>?> GetCryptoMarketsAsync(string currencyId)
+        // Get the exchanges by id
+        public async Task<List<CryptoMarkets>?> GetCryptoMarketsAsync(string currencyId)
         {
             try
             {
@@ -75,43 +72,18 @@ namespace CryptocurrencyApp.APIs
 
                 Debug.WriteLine("Data loaded successfully.");
 
-                var cryptoMarketResponse = await response.Content.ReadFromJsonAsync<CryptoMarketsResponse2>();
+                var cryptoMarketResponse = await response.Content.ReadFromJsonAsync<CryptoMarketsResponse>();
 
 
                 return cryptoMarketResponse.Data;
             }
             catch (HttpRequestException e)
             {
-
-               // MessageBox.Show("Could not load data.", $"Error:{e}", MessageBoxButton.OK, MessageBoxImage.Error);
-
+                Debug.WriteLine($"Error loading data: {e.Message}");
                 return null;
             }
         }
-
-     /*   public async Task<List<CryptoMarkets2>?> GetCryptoMarketsAsync2(string currencyId)
-        {
-            try
-            {
-                var response = await _httpClient.GetAsync($"markets?assetId={currencyId}");
-                response.EnsureSuccessStatusCode();
-
-                Debug.WriteLine("Data loaded successfully.");
-
-                var cryptoMarketResponse = await response.Content.ReadFromJsonAsync<CryptoMarketsResponse2>();
-
-
-                return cryptoMarketResponse.Data;
-            }
-            catch (HttpRequestException e)
-            {
-
-                MessageBox.Show("Could not load data.", $"Error:{e}", MessageBoxButton.OK, MessageBoxImage.Error);
-
-                return null;
-            }
-        }*/
-        
+        //Get the exchange's url
         public async Task<MarketDataDetail?> GetMarketDetail(string exchangeId)
         {
             try
@@ -126,10 +98,9 @@ namespace CryptocurrencyApp.APIs
             catch (HttpRequestException e)
             {
 
-                //MessageBox.Show("Could not load data.", $"Error:{e}", MessageBoxButton.OK, MessageBoxImage.Error);
-
+                Debug.WriteLine($"Error loading data: {e.Message}");
                 return null;
-            }
-}
+            }   
+        }
     }
 }
