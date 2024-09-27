@@ -29,7 +29,7 @@ This application provides various information related to cryptocurrencies, devel
 - **[CoinCap API Documentation](https://docs.coincap.io/)** for cryptocurrency data retrieval
 
 ![](assets/CryptocurrencyApp.gif)
-![](assets/cryptoApp_1.png)
-![](assets/cryptoApp_2.png)
-![](assets/cryptoApp_3.png)
-![](assets/cryptoApp_4.png)
+![](assets/cryptoApp_1.jpg)
+![](assets/cryptoApp_2.jpg)
+![](assets/cryptoApp_3.jpg)
+![](assets/cryptoApp_4.jpg)
