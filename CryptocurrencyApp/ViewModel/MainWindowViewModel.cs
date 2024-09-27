@@ -1,16 +1,9 @@
-﻿using CryptocurrencyApp.APIs;
-using CryptocurrencyApp.Model;
-using System.Diagnostics;
-using System.Net.Http;
-using System.Windows.Input;
-using CryptocurrencyApp.View;
-using Prism.Mvvm;
+﻿using CryptocurrencyApp.View;
 using Prism.Commands;
-using System.Collections.ObjectModel;
-using System.Configuration;
-using Wpf.Ui.Controls;
+using Prism.Mvvm;
 using System.Windows;
-using CryptocurrencyApp.ViewModel;
+using System.Windows.Input;
+using Wpf.Ui.Controls;
 
 namespace CryptocurrencyApp.ViewModel
 {
