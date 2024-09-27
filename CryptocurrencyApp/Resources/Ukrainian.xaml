@@ -11,5 +11,10 @@
     <v:String x:Key="Theme">Тема</v:String>
     <v:String x:Key="Open">Деталі</v:String>
     <v:String x:Key="Back">Назад</v:String>
+    <v:String x:Key="Price">Ціна(USD):</v:String>
+    <v:String x:Key="Volume">Обсяг(24год. USD):</v:String>
+    <v:String x:Key="PriceChange">Зміна ціни(24год.):</v:String>
+    <v:String x:Key="ExchangeID">Назва</v:String>
+    <v:String x:Key="ExchangeURL">Посилання:</v:String>
 
 </ResourceDictionary>

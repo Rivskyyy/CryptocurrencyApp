@@ -11,6 +11,11 @@
     <v:String x:Key="Theme">Theme</v:String>
     <v:String x:Key="Open">Details</v:String>
     <v:String x:Key="Back">Back</v:String>
-   
+    <v:String x:Key="Price">Price(USD):</v:String>
+    <v:String x:Key="Volume">Volume(24hr USD):</v:String>
+    <v:String x:Key="PriceChange">Price change(24hr.):</v:String>
+    <v:String x:Key="ExchangeID">Name</v:String>
+    <v:String x:Key="ExchangeURL">Link:</v:String>
+
 
 </ResourceDictionary>
